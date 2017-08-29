@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+<script>
+	function getColor() {
+		var letter = '123456789ABCDEF';
+		var color = '#';
+		for (var i=0; i<6; i++) {
+			color = color+letter[Math.floor(Math.random()*14)];
+		}
+		return color;
+	}
+
+	$(document).ready(function(){
+
+		$('.blue').on("click",function() {
+			var orange = '#fcdd8f'
+			$(this).css("background-color", orange);
+		})
+
+		$('.orange').on("click",function() {
+			var blue = '#c0d9e5'
+			$(this).css("background-color", blue);
+		})
+
+
+
+		$('.box').hover (
+			function () {
+				$(this).css("background-color",getColor());
+			}
+			);
+	});
+
+
+</script>
+
+<style type="text/css">
+	body {
+		margin: 0px;
+	}
+
+	div {
+		width: 25vw;
+		height: 25vh;
+		display: inline-block;
+		padding: 0px;
+		margin: -4px;
+		box-sizing: border-box;
+	}
+
+	.blue {
+		background-color: #c0d9e5;
+	}
+
+	.orange {
+		background-color: #fcdd8f;
+	}
+
+	/*.blue:hover {
+		background-color: white;
+	}
+
+	.orange:hover {
+		background-color: #e2e2e2;
+	}*/
+
+</style>
+</head>
+
+<body>
+
+	<div class="box blue"></div>
+	<div class="box orange"></div>
+	<div class="box blue"></div>
+	<div class="box orange"></div>
+	<div class="box orange"></div>
+	<div class="box blue"></div>
+	<div class="box orange"></div>
+	<div class="box blue"></div>
+	<div class="box blue"></div>
+	<div class="box orange"></div>
+	<div class="box blue"></div>
+	<div class="box orange"></div>
+	<div class="box orange"></div>
+	<div class="box blue"></div>
+	<div class="box orange"></div>
+	<div class="box blue"></div>
+
+</body>
+
+</html>

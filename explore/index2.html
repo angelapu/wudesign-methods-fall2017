@@ -1,0 +1,258 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+	<script
+	src="https://code.jquery.com/jquery-3.2.1.min.js"
+	integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+	crossorigin="anonymous">	
+</script>
+
+<style type="text/css">
+	body {
+		margin: 0px;
+	}
+
+	div {
+		width: 25vw;
+		height: 25vh;
+		display: inline-block;
+		padding: 0px;
+		margin: -4px;
+		box-sizing: border-box;
+	}
+
+	.box1 {
+		background-color: #edf8fc;
+	}
+
+	.box2 {
+		background-color: #c3dde5;
+	}
+
+	.box3 {
+		background-color: #a6cedb;
+	}
+
+	.box4 {
+		background-color: #85cfea;
+	}
+
+	.box5 {
+		background-color: #62a8c1;
+	}
+
+	.box6 {
+		background-color: #53bde2;
+	}
+
+	.box7 {
+		background-color: #43caf9;
+	}
+
+	.box8 {
+		background-color: #24abd8;
+	}
+
+	.box9 {
+		background-color: #24abd8;
+	}
+
+	.box10 {
+		background-color: #43caf9;
+	}
+
+	.box11 {
+		background-color: #53bde2;
+	}
+
+	.box12 {
+		background-color: #62a8c1;
+	}
+
+	.box13 {
+		background-color: #85cfea;
+	}
+
+	.box14 {
+		background-color: #a6cedb;
+	}
+
+	.box15 {
+		background-color: #c3dde5;
+	}
+
+	.box16 {
+		background-color: #edf8fc;
+	}
+
+	.white:hover {
+		background-color: #f4e7b5;
+	}
+
+	.grey:hover {
+		background-color: #e2e2e2;
+	}
+
+</style>
+</head>
+
+<body>
+	<div class="box white box1"></div>
+	<div class="box grey box2"></div>
+	<div class="box white box3"></div>
+	<div class="box grey box4"></div>
+	<div class="box grey box5"></div>
+	<div class="box white box6"></div>
+	<div class="box grey box7"></div>
+	<div class="box white box8"></div>
+	<div class="box white box9"></div>
+	<div class="box grey box10"></div>
+	<div class="box white box11"></div>
+	<div class="box grey box12"></div>
+	<div class="box grey box13"></div>
+	<div class="box white box14"></div>
+	<div class="box grey box15"></div>
+	<div class="box white box16"></div>
+	
+
+	<script>
+		// 	$("div").on("click", function() {
+		// 		$(this).css("background","#42f4e5");
+		// })
+
+		// $("div").on("click",function(){
+		// 	var newColor = '#'+(0x1000000+(Math.random())*0xffffff).toString(16).substr(1,6);
+		// 	jQuery(".font-style").animate({color: newColor}, 2000);
+		// 	$(this).css("background", newColor);
+		// })
+
+		$(".box").scroll(function(){
+			for 
+			var newColor = '#'+(0x1000000+(Math.random())*0xffffff).toString(16).substr(1,6);
+			jQuery(".font-style").animate({color: newColor}, 2000);
+			$(this).css("background",newColor);
+		})
+
+		// $("div").on("click",function(){
+		// 	$(this).css("background", "silver");
+		// })
+
+
+	</script>
+
+</body>
+
+</html>
+ -->
+
+
+
+
+ <!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+<script>
+	
+function getColor() {
+	var letters = '56789ABCDEF';
+	var color = '#';
+	for (var i=0; i<6; i++) {
+		color = color + letters[Math.floor(Math.random()*6)];
+	}
+	return color;
+}
+
+$(document).ready(function() {
+	$('div').scroll(
+
+	function() {
+		$(this).css("background-color",getColor());
+	}
+	)
+
+</script>
+
+<style type="text/css">
+	body {
+		margin: 0px;
+	}
+
+	div {
+		width: 20vw;
+		height: 20vh;
+		display: inline-block;
+		padding: 0px;
+		margin: -3px;
+		box-sizing: border-box;
+	}
+
+	.blue {
+		background-color: #4286f4;
+	}
+
+	.blue:hover {
+		background-color: white;
+	}
+
+	.orange:hover {
+		background-color: #e2e2e2;
+	}
+
+	.orange {
+		background-color: #f4ac41;
+	}
+
+</style>
+</head>
+
+<body>
+	<div class="box blue"></div>
+	<div class="box orange"></div>
+	<div class="box blue"></div>
+	<div class="box orange"></div>
+	<div class="box orange"></div>
+	<div class="box blue"></div>
+	<div class="box orange"></div>
+	<div class="box blue"></div>
+	<div class="box blue"></div>
+	<div class="box orange"></div>
+	<div class="box blue"></div>
+	<div class="box orange"></div>
+	<div class="box orange"></div>
+	<div class="box blue"></div>
+	<div class="box orange"></div>
+	<div class="box blue"></div>
+	<div class="box blue"></div>
+	<div class="box orange"></div>
+	<div class="box blue"></div>
+	<div class="box orange"></div>
+	<div class="box orange"></div>
+	<div class="box blue"></div>
+	<div class="box orange"></div>
+	<div class="box blue"></div>
+	<div class="box blue"></div>
+	
+
+	<script>
+		// 	$("div").on("click", function() {
+		// 		$(this).css("background","#42f4e5");
+		// })
+
+		$("div").on("click",function(){
+			var newColor = '#'+(0x1000000+(Math.random())*0xffffff).toString(16).substr(1,6);
+			jQuery(".font-style").animate({color: newColor}, 2000);
+			$(this).css("background", newColor);
+		})
+
+		// $("div").on("click",function(){
+		// 	$(this).css("background", "silver");
+		// })
+
+
+	</script>
+
+</body>
+
+</html>
