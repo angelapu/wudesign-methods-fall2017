@@ -14,12 +14,12 @@
 		}
 
 		.triangle {
-			width: 0; 
-			height: 0; 
-			border-left: 50px solid transparent;
-			border-right: 50px solid transparent;
-			border-bottom: 100px solid black;
-			display: none;
+			cursor: pointer;
+			width: 0;
+			height: 0;
+			border-left: 60px solid transparent;
+			border-right: 60px solid transparent;
+			border-bottom: 100px solid #F5CB5C;
 		}
 
 		.rectangle {
@@ -117,6 +117,22 @@
 			to {transform: rotate(180deg);}
 		}
 
+		@keyframes both {
+			from {border-radius:0px, transform: rotate(0deg);}
+			to {border-radius:100px, transform: rotate(180deg);}
+		}
+
+		#ninetyOne .button91.selected {
+			animation-name: both;
+			animation-duration: 5s;
+			transform: rotate(360);
+			border-radius: 100px;
+		}
+
+		#ninetyOne .button91.selected:active {
+			transform: matrix(2, 1, 0, 3, 0, 0);
+		}
+
 		#fiftyEight .button58.selected {
 			animation-name: rotate;
 			animation-duration: 1s;
@@ -189,6 +205,19 @@
 			-webkit-animation-iteration-count: infinite;
 		}
 
+		.button88:active {
+			transform: matrix(1, -0.3, 0, 3, 0, 0);
+		}
+
+		.button89:active {
+			transform: matrix(2, 1, 0, 3, 0, 0);
+		}
+
+		.perspective {
+			border:1px solid black;
+			perspective: 150px;
+		}
+
 		/*.text71 {
 			display: none;
 		}
@@ -231,9 +260,9 @@
 
 		$(document).ready(function(){
 
-			$('.button16 .rectangle').on(function(){
-				$(this).animate({opacity: 0}, 1000);
-				$(this).css({'z-index': '0'}, 1000);
+			$('#sixteen .button16').click(function(){
+				$('.triangle').animate({opacity: 0}, 1000);
+				// $('triangel').css({'': '0'}, 1000);
 
 			})
 
@@ -647,14 +676,77 @@
 				$('div').css('background-color', 'silver');
 			})
 
-			$('.button87')
-			.mousedown(function(){
-				$('.button85 .button83 .button81 .button79 .button77 .button75 .button73 .button71').css({ '-webkit-filter':'blur(15px)'});
-			.mouseup(function(){
-				$('.button85 .button83 .button81 .button79 .button77 .button75 .button73 .button71').css('background-color','silver');
+			$('.button87').on('click',function(){
+				document.getElementById("date").innerHTML = Date();
 			})
 
+			$('.button88').on('click',function(){
+				$(this).css('background',getColor());
+			})
 
+			$('.button90').on('click',function(){
+				window.open('', '_self').close();
+			})
+
+			$('.button91').on('click',function(){
+				$(this).toggleClass('selected');
+				// $(this).css('background-color',getColor())
+			})
+
+			$('.button92').on('click',function(){
+				$(this).css('background','radial-gradient(red, green, blue)');
+				// $(this).css('background-color',getColor())
+			})
+
+			$('.button93').on('click',function(){
+				$(this).css('background','radial-gradient(#189699, white)');
+				// $(this).css('background-color',getColor())
+			})
+
+			$('.button94').on('click',function(){
+				$(this).css('background','linear-gradient(#189699, white)');
+				// $(this).css('background-color',getColor())
+			})
+
+			$('.button95').on('click',function(){
+				$(this).css('background','linear-gradient(to bottom right, #189699, white)');
+				// $(this).css('background-color',getColor())
+			})
+
+			$('.button95').on('click',function(){
+				$(this).css('background','linear-gradient(to bottom right, #189699, white)');
+				$(this).delay().animate({opacity: 0}, 1000);
+				// $(this).css('background-color',getColor())
+			})
+
+			$('.button96').on('click',function(){
+				$(this).css('background','black');
+				$(this).delay().animate({opacity: 0}, 1000);
+				// $(this).css('background-color',getColor())
+			})
+
+			$('.button97').on('click',function(){
+				$(this).css('background','repeating-linear-gradient(red, yellow 10%, green 20%)');
+				$(this).delay().animate({opacity: 0}, 1000);
+				// $(this).css('background-color',getColor())
+			})
+
+			$('.button98').on('click',function(){
+				$(this).css('border-style','dotted');
+			})
+
+			$('.button99').on('click',function(){
+				// $(this).animate({transform: rotateZ(90deg)}, 410);
+				// $(this).animate({(transform:rotate3d(0,1,0,100deg)1000});
+				$(this).css('transform','rotate3d(0,1,0,100deg)');
+			})
+
+			$('.button100').on('click',function(){
+				// $(this).animate({transform: rotateZ(90deg)}, 410);
+				// $(this).animate({(transform:rotate3d(0,1,0,100deg)1000});
+				$(this).css('transform','rotateX(45deg)');
+			})
+			
 		});
 
 
@@ -665,9 +757,12 @@
 
 <body>
 	<!-- figure out what this one is supposed to do -->
-	<div class="button16">
-		<div type="button" class="rectangle"></div>
-	</div>	
+	<div id="sixteen">
+		<div class="grey button16">
+			<h1>Click</h1>
+		</div>	
+		<div class="triangle"></div>
+	</div>
 
 	<!-- ball turns into triangle -->
 	<div id='button17'>
@@ -1063,7 +1158,100 @@
 
 	<div id='eightySeven'>
 		<div class="grey button87">
+			<p id="date"></p>
+		</div>
+		<!-- <h3 class="text72">check console</h3> -->
+	</div>
+
+	<div id='eightyEight'>
+		<div class="grey button88">
 			<h1>Click!</h1>
+		</div>
+		<!-- <h3 class="text72">check console</h3> -->
+	</div>	
+
+	<div id='eightyNine'>
+		<div class="grey button89">
+			<h1>Click!</h1>
+		</div>
+		<!-- <h3 class="text72">check console</h3> -->
+	</div>	
+
+	<div id='ninety'>
+		<div class="grey button90">
+			<h1>Click!</h1>
+		</div>
+		<!-- <h3 class="text72">check console</h3> -->
+	</div>
+
+	<div id='ninetyOne'>
+		<div class="grey button91">
+			<h1>Click!</h1>
+		</div>
+		<!-- <h3 class="text72">check console</h3> -->
+	</div>	
+
+	<div id='ninetyTwo'>
+		<div class="grey button92">
+			<h1>Click!</h1>
+		</div>
+		<!-- <h3 class="text72">check console</h3> -->
+	</div>	
+
+	<div id='ninetyThree'>
+		<div class="grey button93">
+			<h1>Click!</h1>
+		</div>
+		<!-- <h3 class="text72">check console</h3> -->
+	</div>
+
+	<div id='ninetyFour'>
+		<div class="grey button94">
+			<h1>Click!</h1>
+		</div>
+		<!-- <h3 class="text72">check console</h3> -->
+	</div>	
+
+	<div id='ninetyFive'>
+		<div class="grey button95">
+			<h1>Click!</h1>
+		</div>
+		<!-- <h3 class="text72">check console</h3> -->
+	</div>	
+
+	<div id='ninetySix'>
+		<div class="grey button96">
+			<h1>Click!</h1>
+		</div>
+		<!-- <h3 class="text72">check console</h3> -->
+	</div>	
+
+	<div id='ninetySeven'>
+		<div class="grey button97">
+			<h1>Click!</h1>
+		</div>
+		<!-- <h3 class="text72">check console</h3> -->
+	</div>	
+
+	<div id='ninetyEight'>
+		<div class="grey button98">
+			<h1>Click!</h1>
+		</div>
+		<!-- <h3 class="text72">check console</h3> -->
+	</div>	
+
+	<div id='ninetyNine'>
+		<div class="grey button99">
+			<h1>Click!</h1>
+		</div>
+		<!-- <h3 class="text72">check console</h3> -->
+	</div>	
+
+	<div id='hundred'>
+		<div class="perspective">
+			<div class="move grey button100">
+				<h1>Click!</h1>
+			</div>
 		</div>
 		<!-- <h3 class="text72">check console</h3> -->
 	</div>	
