@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+	<style type="text/css">
+
+		#follower {
+			height: 300px;
+			width: 300px;
+			background-color: #86efd7;
+			position: absolute;
+			float:left;
+		}
+
+	</style>
+
+</head>
+
+
+<body>
+	<div id="follower"></div>
+
+	<script>
+
+		// function drawCircle {
+		// 	var canvas = document.getElementById("myCanvas");
+		// 	var radius = Math.floor(Math.random()*10);
+		// }
+
+
+		
+		$(document).bind('mousemove' , function(e) {
+			$('#follower').css({
+				left:  e.pageX + 20,
+				top:   e.pageY
+			});
+		});
+
+
+	</script>
+
+</body>
+</html>

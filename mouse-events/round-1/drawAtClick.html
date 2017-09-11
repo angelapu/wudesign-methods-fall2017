@@ -1,0 +1,61 @@
+<html>
+<head>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+	<style type="text/css">
+
+		#test {
+			width: 200px;
+			height: 200px;
+			background-color: orange;
+		}
+
+		/*#follower {
+			height: 300px;
+			width: 300px;
+			position: absolute;
+			float:left;
+		}
+*/
+	</style>
+
+	<script type="text/javascript">
+		$(document).ready(function(){
+
+			// $(document).click(function(){
+			// 	$("#test").
+			// });
+
+			// $(document).bind('mousemove' , function(e) {
+			// 	$('#test').css({
+			// 		left:  e.pageX + 20,
+			// 		top:   e.pageY
+			// 	});
+			// });
+
+			$(document).click(function(e){
+				$("#test").show(20);
+				$("#test").offset({left:e.pageX,top:e.pageY});
+				$(document).append($('<div>', {id: 'follower'}));
+			});
+
+			//  $(document).click(function(e){
+			// 	$('#test').css('left',test.pageX);
+			// 	$('#test').css('top',test.pageY);
+			// });
+
+		});
+
+	</script>
+
+
+</head>
+
+
+<body id="BodyID">
+
+	<div id="test"></div>
+
+</body>
+</html>

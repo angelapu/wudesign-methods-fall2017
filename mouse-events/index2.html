@@ -1,0 +1,1387 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="jqfloat.js"></script>
+	<style type="text/css">
+
+		div {
+			font-family:'Open Sans', sans-serif; 
+			display: inline-block;
+			padding: 0px;
+			margin: 20px;
+			text-align: center;
+		}
+
+		.triangle {
+			cursor: pointer;
+			width: 0;
+			height: 0;
+			border-left: 60px solid transparent;
+			border-right: 60px solid transparent;
+			border-bottom: 100px solid #F5CB5C;
+		}
+
+		.rectangle {
+			width: 100px;
+			height: 100px;
+			background-color: magenta;
+			display: inline-block;
+		}
+
+		#button17 .triangleTwo{
+			cursor: pointer;
+			width: 0;
+			height: 0;
+			border-left: 60px solid transparent;
+			border-right: 60px solid transparent;
+			border-bottom: 100px solid #F5CB5C;
+		}
+
+		#button17 .ballTwo{
+			cursor: pointer;
+			background: #f25a41;
+			border-radius: 50%;
+			height: 100px;
+			width: 100px;
+			opacity: 0;
+			z-index: 3;
+		}
+
+
+		#eighteen .button18 {
+			width: 80px;
+			height: 20px;
+
+			background-color:#f25841;
+			border-radius:12px;
+			cursor:pointer;
+			color:#ffffff;
+			font-size:19px;
+			padding:30px 50px;
+		}
+
+		#eighteen .button18:active {
+			position:relative;
+			top:100px;
+		}
+
+		#nineteen .button19 {
+			width: 80px;
+			height: 20px;
+			margin-top: 20px;
+
+			background-color: lavenderblush;
+			border-radius: 12px;
+			padding: 30px 50px;
+			display: inline-block;
+
+		}
+
+		h1 {
+			font-size: 15px;
+		}
+
+		.grey {
+			width: 100px;
+			height: 100px;
+			background-color: silver;
+			padding: 0px;
+		}
+
+		.lightGrey {
+			width: 100px;
+			height: 100px;
+			background-color: #828080;
+			padding: 0px;
+		}
+
+		#twentyseven .button27.selected {
+			animation-name: spin;
+			animation-duration: .25s;
+			transform: rotate(360deg);
+		}
+
+		@keyframes spin {
+			from {transform: rotate(0deg);}
+			to {transform: rotate(360deg);}
+		}
+
+		@keyframes rounded {
+			from {border-radius: 0px;}
+			to {border-radius: 100px;}
+		}
+
+		@keyframes rotate {
+			from {transform: rotate(0deg);}
+			to {transform: rotate(180deg);}
+		}
+
+		@keyframes both {
+			from {border-radius:0px, transform: rotate(0deg);}
+			to {border-radius:100px, transform: rotate(180deg);}
+		}
+
+		#ninetyOne .button91.selected {
+			animation-name: both;
+			animation-duration: 5s;
+			transform: rotate(360);
+			border-radius: 100px;
+		}
+
+		#ninetyOne .button91.selected:active {
+			transform: matrix(2, 1, 0, 3, 0, 0);
+		}
+
+		#fiftyEight .button58.selected {
+			animation-name: rotate;
+			animation-duration: 1s;
+			transform: rotate(180);
+		}
+
+		#fiftyNine .button59.selected {
+			animation-name: rotate;
+			animation-duration: 1s;
+			transform: rotate(180);
+		}
+
+		#sixty .button60.selected {
+			animation-name: rotate;
+			animation-duration: 1s;
+			transform: rotate(180);
+		}
+
+		.button28.selected {
+			animation-name: rounded;
+			animation-duration: .25s;
+			border-radius: 100px;
+		}
+
+		.button29 {
+			-moz-border-radius:0px;
+			-webkit-border-radius:0px;
+			/*border-radius:70px;*/
+			/*padding:30px 25px;*/
+			text-align: center;
+			top:70px;
+			position:relative;
+		}
+
+		.move {
+			position: relative;
+		}
+
+		#sixtySix .button66 p {
+			text-align: left;
+			column-width: 200px;
+		}
+
+		@keyframes pulse {
+			0% {
+				background-color: #001F3F;
+			}
+			100% {
+				background-color: #FF4136;
+			}
+		}
+
+		#sixtyEight .button68.selected {
+			animation-name: pulse;
+			animation-duration: 1s;
+		}
+
+		#seventyFive .button75 {
+			-moz-border-radius:42px;
+			-webkit-border-radius:42px;
+			border-radius:70px;
+			padding:30px 25px;
+			text-align: center;
+		}
+
+		.button79 {
+
+			-webkit-animation-duration: 1s;
+			-webkit-animation-delay: 0.5s;
+			-webkit-animation-iteration-count: infinite;
+		}
+
+		.button88:active {
+			transform: matrix(1, -0.3, 0, 3, 0, 0);
+		}
+
+		.button89:active {
+			transform: matrix(2, 1, 0, 3, 0, 0);
+		}
+
+		.perspective {
+			border:1px solid black;
+			perspective: 150px;
+		}
+
+		/*.text71 {
+			display: none;
+		}
+
+		#seventyOne .button71 .text71.selected {
+			display: inline-block;
+		}*/
+
+	</style>
+
+	<script>
+		function getColor() {
+			var letter = '123456789ABCDEF';
+			var color = '#';
+			for (var i=0; i<6; i++) {
+				color = color+letter[Math.floor(Math.random()*14)];
+			}
+			return color;
+		}
+
+		function getHeight() {
+			var height =2*(Math.floor(Math.random()*100));
+			var px = 'px';
+			return height + px;
+		}
+
+		function getWidth() {
+			var width =2*(Math.floor(Math.random()*100));
+			var px = 'px';
+			return width + px;	
+		}
+
+		function getFontSize() {
+			var size = 10 + (Math.floor(Math.random()*100));
+			var px = 'px';
+			return size;
+		}
+
+		
+
+		$(document).ready(function(){
+
+			$('#sixteen .button16').click(function(){
+				$('.triangle').animate({opacity: 0}, 1000);
+				// $('triangel').css({'': '0'}, 1000);
+
+			})
+
+			$( "#button17 .triangleTwo" ).click(function() {
+				$(this).animate({opacity: 0}, 1000);
+				$(this).css({'z-index': '3'}, 1000);
+				$('#button17 .ballTwo').delay(1000).animate({opacity: 1}, 1500);
+				$('#button17 .ballTwo').css({'z-index': '4'}, 1000);
+			});
+
+			$( "#nineteen .button19" ).click(function() {
+				$('#nineteen .button19 h1').animate({opacity: 0}, 1000);
+			});
+
+			$( "#twenty .button20" ).click(function() {
+				$('#twenty .button20').animate({width: 200}, 1000);
+			});
+
+			$( "#twentyone .button21" ).click(function() {
+				$('#twentyone .button21').animate({width: 200}, 1000);
+				$(this).css('background',getColor());
+				$('#twentyone .button21').animate({width: 100}, 1000);
+			});
+
+			// $( "#twentytwo .button22" ).click(function() {
+			// 	$('#twentytwo .button22').animate({height: 200}, 1000);
+			// });
+
+			$( "#twentytwo .button22").click(function() {
+				$('#twentytwo .button22').animate({height: getHeight()}, 1000);
+			});
+
+			$( "#twentythree .button23").click(function() {
+				$(this).animate({width: getWidth()}, 1000);
+			});
+
+			$( "#twentyfour .button24").click(function() {
+				$(this).animate({width: getWidth()}, 1000);
+				$(this).css('background',getColor());
+				$(this).animate({width: 100}, 1000);
+			});
+
+			$( "#twentyfive .button25" ).click(function() {
+				$(this).animate({height: 200}, 1000);
+			});
+
+			$( "#twentysix .button26" ).click(function() {
+				$(this).animate({height: getHeight()}, 1000);
+				$(this).css('background',getColor());
+				$(this).animate({height: 100}, 1000);
+			});
+
+			$('#twentyseven .button27').on("click",function(){
+				$(this).toggleClass("selected");
+				$(this).css('background',getColor());
+			})
+
+			$('#twentyeight .button28').on("click",function(){
+				$(this).toggleClass("selected");
+				$(this).css('background',getColor());
+			})
+
+
+			$('#twentynine .button29').on("click",function(){
+				$('.button29').animate({top: 500}, 410);
+				$('.button29').delay(200).animate({top: 0}, 410);
+			})
+
+
+			$('#thirty .button30').on("click",function(){
+				$('.button30').animate({top: 500}, 410);
+				$(this).animate({opacity: 0}, 1000);
+			})
+
+			$('#thirtyOne .button31').on("click",function(){
+				$('.button31').animate({top: 500}, 410);
+				$(this).css('background',getColor());
+				$('.button31').delay(200).animate({top: 0}, 410);	
+			})
+
+			$('#thirtyTwo .button32').on("click",function(){
+				$(this).animate({bottom: 500}, 410);
+				$(this).animate({opacity: 0}, 1000);
+			})
+
+			$('#thirtyThree .button33').on("click",function(){
+				$(this).animate({bottom: 500}, 410);
+				$(this).delay(200).animate({bottom: 0}, 410);
+			})
+
+			$('#thirtyFour .button34').on("click",function(){
+				$(this).animate({bottom: 500}, 410);
+				$(this).delay(200).animate({left: 500}, 410);
+				$(this).delay(200).animate({left: 0}, 410);
+				$(this).animate({opacity: 0}, 1000);
+			})
+
+			$('#thirtyFive .button35').on("click",function(){
+				$(this).animate({bottom: 500}, 410);
+				$(this).delay(200).animate({left: 500}, 410);
+				$(this).delay(200).animate({left: 0}, 410);
+				$(this).animate({bottom: 0}, 410);
+			})
+
+
+			$('#thirtySix .button36').on("click",function(){
+				$(this).animate({bottom: 500, left:500}, 410);
+				$(this).animate({opacity: 0}, 1000);
+			})
+
+			$('#thirtySeven .button37').on("click",function(){
+				$(this).animate({bottom: 500}, 410);
+				$(this).delay(200).animate({left: 500}, 410);
+				$(this).css('background',getColor());
+				$(this).delay(200).animate({left: 0}, 410);
+				$(this).animate({bottom: 0}, 410);
+			})
+
+			$('#thirtyEight .button38').on("click",function(){
+				$(this).animate({bottom: 500, left:500}, 410);
+				$(this).css('background',getColor());
+				$(this).delay(200).animate({bottom: 0, left:0}, 410);
+			})
+
+			$('#thirtyNine .button39').on("click",function(){
+				$(this).animate({bottom: 500, right:500}, 410);
+				$(this).delay(200).animate({bottom: 0, right:0}, 410);
+			})
+
+			$('#fourty .button40').on("click",function(){
+				$(this).animate({bottom: 500, right:500}, 410);
+				$(this).delay(200).css('background',getColor());
+				$(this).delay(200).animate({bottom: 0, right:0}, 410);
+			})
+
+			$('#fourtyOne .button41').on("click",function(){
+				$(this).animate({bottom: 500, right:500}, 410);
+				$(this).animate({opacity: 0}, 1000);
+			})
+
+			$('#fourtyTwo .button42').on("click",function(){
+				$(this).animate({bottom: 500}, 410);
+				$(this).delay(200).animate({left: 500}, 410);
+				$(this).delay(200).animate({left: 0}, 410);
+				$(this).animate({bottom: 0}, 410);
+			})
+
+			$('#fourtyThree .button43').on("click",function(){
+				$(this).animate({bottom: 500, left: 500}, 410);
+				$(this).delay(200).animate({bottom:0, left:0}, 410);
+			})
+
+			$('#fourtyFour .button44').on("click",function(){
+				$(this).animate({bottom: 500, left: 500}, 410);
+				$(this).animate({opacity: 0}, 1000);
+			})
+
+			$('#fourtyFive .button45').on("click",function(){
+				$(this).animate({left: 500}, 410);
+				$(this).animate({left: 0}, 410);
+				$(this).animate({left: 400}, 410);
+				$(this).animate({left: 0}, 410);
+				$(this).animate({left: 200}, 410);
+				$(this).animate({left: 0}, 410);
+				$(this).animate({left: 50}, 410);
+				$(this).animate({left: 0}, 410);
+			})
+
+			$('#fourtySix .button46').on("click",function(){
+				$(this).animate({right: 500}, 410);
+				$(this).animate({right: 0}, 410);
+				$(this).animate({right: 400}, 410);
+				$(this).animate({right: 0}, 410);
+				$(this).animate({right: 200}, 410);
+				$(this).animate({right: 0}, 410);
+				$(this).animate({right: 50}, 410);
+				$(this).animate({right: 0}, 410);
+			})
+
+			$('#fourtySeven .button47').on("click",function(){
+				$(this).animate({right: 500}, 410);
+				$(this).css('background',getColor());
+				$(this).animate({right: 0}, 410);
+				$(this).animate({right: 400}, 410);
+				$(this).animate({right: 0}, 410);
+				$(this).animate({right: 200}, 410);
+				$(this).animate({right: 0}, 410);
+				$(this).animate({right: 50}, 410);
+				$(this).animate({right: 0}, 410);
+			})
+
+			$('#fourtyEight .button48').on("click",function(){
+				$(this).animate({left: 500}, 410);
+				$(this).css('background',getColor());
+				$(this).animate({left: 0}, 410);
+				$(this).animate({left: 400}, 410);
+				$(this).animate({left: 0}, 410);
+				$(this).animate({left: 200}, 410);
+				$(this).animate({left: 0}, 410);
+				$(this).animate({left: 50}, 410);
+				$(this).animate({left: 0}, 410);
+			})
+
+			$('#fourtynine .button49').on("click",function(){
+				$(this).animate({left: 100}, 410);
+				$(this).animate({left: -100}, 410);
+				$(this).animate({left: 100}, 410);
+				$(this).animate({left: -100}, 410);
+				$(this).animate({left: 100}, 410);
+				$(this).animate({left: -100}, 410);
+				$(this).animate({left: 0}, 410);
+			})
+
+			$("#fifty .button50").click(function(){
+				$(this).fadeToggle(1000);
+				$(this).fadeIn(1000);
+			});
+
+			$("#fiftyOne .button51").click(function(){
+				$(this).fadeOut(3000);
+				$(this).fadeIn(3000);
+			});
+
+			$("#fiftyTwo .button52").click(function(){
+				$(this).fadeOut();
+				$(this).fadeIn();
+			});
+
+			$("#fiftyThree .button53").click(function(){
+				$(this).fadeOut(1000);
+				$(this).css('background',getColor());
+				$(this).fadeIn(1000);
+			});
+
+			$("#fiftyFour .button54").click(function(){
+				$(this).fadeOut(1000);
+				$(this).css('height',getHeight());
+				$(this).fadeIn(1000);
+			});
+
+			$("#fiftyFive .button55").click(function(){
+				$(this).fadeOut(1000);
+				$(this).css('width',getWidth());
+				$(this).fadeIn(1000);
+			});
+
+			$("#fiftySix .button56").click(function(){
+				$(this).fadeOut(1000);
+				$(this).css('width',getWidth());
+				$(this).css('height',getHeight());
+				$(this).fadeIn(1000);
+			});
+
+			$("#fiftySeven .button57").click(function(){
+				$(this).fadeOut(1000);
+				$(this).css('background',getColor());
+				$(this).css('width',getWidth());
+				$(this).css('height',getHeight());
+				$(this).fadeIn(1000);
+			});
+
+			$('#fiftyEight .button58').on("click",function(){
+				$(this).toggleClass("selected");
+				// $(this).css('background',getColor());
+			})
+
+			$('#fiftyNine .button59').on("click",function(){
+				$(this).toggleClass("selected");
+				$(this).css('background',getColor());
+			})
+
+			$('#sixty .button60').on("click",function(){
+				$(this).toggleClass("selected");
+				$(this).css('background',getColor());
+				$(this).animate({opacity: 0}, 1000);
+			})
+
+			$('#sixtyOne .button61').on("click",function(){
+				$(this).css('color',getColor());
+			})
+
+			$('#sixtyTwo .button62').on("click",function(){
+				$('#sixtyTwo .button62 h1').css('font-size',getFontSize());
+			})
+
+			$('#sixtyThree .button63').on("click",function(){
+				$(this).css('zoom','2');
+			})
+
+			$('#sixtyFour .button64').on("click",function(){
+				$(this).css('zoom','.25');
+			})
+
+			$( 'body' ).on( "click", ".button65", function() {
+				$( this ).after(  "<h3>O</h3>");
+			})
+
+			$('#sixtySix .button66').on("click",function(){
+				$('.text66').css("line-height","50%");
+			})
+
+			$('#sixtySeven .button67').on("click",function(){
+				$('.text67').css("line-height","300%");
+			})
+
+			$('#eighty .button80').on("click",function(){
+				$('.text80').css("line-height","20%");
+				$('.text80').css("font-size","230px");
+			})	
+
+			$('#sixtyEight .button68').on("click",function(){
+				$(this).toggleClass('selected');
+			})		
+
+			$( "#sixtyNine .button69" ).click(function() {
+				$('html, body').animate({ scrollTop: '+=800px'}, 800);
+				$(this).animate({opacity: 1}, 500);
+			});
+
+			$( "#seventy .button70" ).click(function() {
+				$('html, body').animate({ scrollTop: '-=800px'}, 800);
+				$(this).animate({opacity: 1}, 500);
+			});
+
+			$('*').on('click',function(event){
+				console.log("hello");
+			});
+
+			$('.button71').on('click',function(event){
+				console.log("world");
+			});
+
+			$('.button71').on('click',function(){
+				$('text71').toggleClass();
+			});
+
+			$('.button72').on('click',function(event){
+				window.alert("hello world");
+			});
+
+			$('.button73').on('click',function(event){
+				document.write("all gone!");
+			});
+
+			$('.button74').on('click',function(){
+				$(this).animate({ width: '200px'}, 510);
+				$(this).delay(400).animate({ top: '100px'}, 510);
+				$(this).delay(400).animate({ top: '0px'}, 510);
+				$(this).delay(400).animate({ width: '100px'}, 510);
+			});
+
+			$('.button75').on('click',function(){
+				$(this).animate({'border-radius':'5px'}, 710);
+				$(this).animate({top:'200px'}, 710);
+				$(this).animate({'border-radius':'50%'}, 710);
+				$(this).animate({height:'100px'}, 710);
+			});
+
+			$('.button76').on('click',function(){
+				$(this).css('zoom','10');
+			});
+
+			$('.button77').on('click',function(){
+				$('.button77').css({ '-webkit-filter':'drop-shadow(8px 8px 10px #f25a41)'});
+			});
+
+			$('.button78').on('click',function(){
+				$(this).css({ '-webkit-filter':'blur(15px)'});
+			});
+
+			$('.button79').on('click',function(){
+				$('div').css({ '-webkit-filter':'blur(15px)'});
+			});
+
+			$('.button81').on('click',function(){
+				$('div').unbind();
+			});
+
+			$('.button82').on('click',function(){
+				$('.text82').css('font-family','serif')
+			});
+
+			$('.button83').on('click',function(){
+				$('.text83').css('color','white');
+			});
+
+			$('.button84')
+			.mousedown(function(){
+				$('html').css('background','black');
+			})
+			.mouseup(function() {
+				$('html').css('background','white');
+			})
+
+			$('.button85')
+			.mousedown(function(){
+				$('div').css({ '-webkit-filter':'blur(15px)'});
+			})
+			.mouseup(function(){
+				$('div').css({ '-webkit-filter':'blur(0px)'});
+			})
+
+
+			$('.button86')
+			.mousedown(function(){
+				$('div').css({ '-webkit-filter':'blur(15px)'});
+				$('div').css('background-color', getColor());
+			})
+			.mouseup(function(){
+				$('div').css({ '-webkit-filter':'blur(0px)'});
+				$('div').css('background-color', 'silver');
+			})
+
+			$('.button87').on('click',function(){
+				document.getElementById("date").innerHTML = Date();
+			})
+
+			$('.button88').on('click',function(){
+				$(this).css('background',getColor());
+			})
+
+			$('.button90').on('click',function(){
+				window.open('', '_self').close();
+			})
+
+			$('.button91').on('click',function(){
+				$(this).toggleClass('selected');
+				// $(this).css('background-color',getColor())
+			})
+
+			$('.button92').on('click',function(){
+				$(this).css('background','radial-gradient(red, green, blue)');
+				// $(this).css('background-color',getColor())
+			})
+
+			$('.button93').on('click',function(){
+				$(this).css('background','radial-gradient(#189699, white)');
+				// $(this).css('background-color',getColor())
+			})
+
+			$('.button94').on('click',function(){
+				$(this).css('background','linear-gradient(#189699, white)');
+				// $(this).css('background-color',getColor())
+			})
+
+			$('.button95').on('click',function(){
+				$(this).css('background','linear-gradient(to bottom right, #189699, white)');
+				// $(this).css('background-color',getColor())
+			})
+
+			$('.button95').on('click',function(){
+				$(this).css('background','linear-gradient(to bottom right, #189699, white)');
+				$(this).delay().animate({opacity: 0}, 1000);
+				// $(this).css('background-color',getColor())
+			})
+
+			$('.button96').on('click',function(){
+				$(this).css('background','black');
+				$(this).delay().animate({opacity: 0}, 1000);
+				// $(this).css('background-color',getColor())
+			})
+
+			$('.button97').on('click',function(){
+				$(this).css('background','repeating-linear-gradient(red, yellow 10%, green 20%)');
+				$(this).delay().animate({opacity: 0}, 1000);
+				// $(this).css('background-color',getColor())
+			})
+
+			$('.button98').on('click',function(){
+				$(this).css('border-style','dotted');
+			})
+
+			$('.button99').on('click',function(){
+				// $(this).animate({transform: rotateZ(90deg)}, 410);
+				// $(this).animate({(transform:rotate3d(0,1,0,100deg)1000});
+				$(this).css('transform','rotate3d(0,1,0,100deg)');
+			})
+
+			$('.button100').on('click',function(){
+				// $(this).animate({transform: rotateZ(90deg)}, 410);
+				// $(this).animate({(transform:rotate3d(0,1,0,100deg)1000});
+				$(this).css('transform','rotateX(45deg)');
+			})
+			
+		});
+
+
+
+
+	</script>
+</head>
+
+<body>
+	<!-- figure out what this one is supposed to do -->
+	<div id="sixteen">
+		<div class="grey button16">
+			<h1>Click</h1>
+		</div>	
+		<div class="triangle"></div>
+	</div>
+
+	<!-- ball turns into triangle -->
+	<div id='button17'>
+		<div class="triangleTwo"></div>
+		<div class="ballTwo"></div>
+	</div>
+
+	<!-- moves button -->
+	<div id='eighteen'>
+		<div class="button18">Click Me!</div>
+	</div>
+
+	<!-- makes text dissapear -->
+	<div id='nineteen'>
+		<div class="button19">
+			<h1>Make me disappear</h1>
+		</div>
+	</div>
+
+	<!-- makes box longer -->
+	<div id='twenty'>
+		<div class="grey button20">
+			<h1>Click!</h1>
+		</div>
+	</div>
+
+	<!-- makes box longer and changes color -->
+	<div id='twentyone'>
+		<div class="grey button21">
+			<h1>Click!</h1>
+		</div>
+	</div>
+
+	<!-- makes box randomly longer -->
+	<div id='twentythree'>
+		<div class="grey button23">
+			<h1>Click!</h1>
+		</div>
+	</div>
+
+	<!-- makes box randomly longer and random color -->
+	<div id='twentyfour'>
+		<div class="grey button24">
+			<h1>Click!</h1>
+		</div>
+	</div>
+
+	<!-- makes box taller -->
+	<div id='twentyfive'>
+		<div class="grey button25">
+			<h1>Click!</h1>
+		</div>
+	</div>
+
+	<!-- makes box randomly taller -->
+	<div id='twentytwo'>
+		<div class="grey button22">
+			<h1>Click!</h1>
+		</div>
+	</div>
+
+	<!-- makes box randomly taller and random color -->
+	<div id='twentysix'>
+		<div class="grey button26">
+			<h1>Click!</h1>
+		</div>
+	</div>
+
+	<!-- spin and change color -->
+	<div id='twentyseven'>
+		<div class="grey button27">
+			<h1>Click!</h1>
+		</div>
+	</div>
+
+	<!-- round and change color -->
+	<div id='twentyeight'>
+		<div class="grey button28">
+			<h1>Click!</h1>
+		</div>
+	</div>
+
+	<!-- move down and back -->
+	<div id='twentynine'>
+		<div class="grey move button29">
+			<h1>Click!</h1>
+		</div>
+	</div>
+
+	<!-- move down and disapear -->
+	<div id='thirty'>
+		<div class="grey move button30">
+			<h1>Click!</h1>
+		</div>
+	</div>
+
+	<!-- move down, up change color, back -->
+	<div id='thirtyOne'>
+		<div class="grey move button31">
+			<h1>Click!</h1>
+		</div>
+	</div>
+
+	<!-- move up, disappear -->
+	<div id='thirtyTwo'>
+		<div class="grey move button32">
+			<h1>Click!</h1>
+		</div>
+	</div>
+
+	<!-- move up move down -->
+	<div id='thirtyThree'>
+		<div class="grey move button33">
+			<h1>Click!</h1>
+		</div>
+	</div>
+
+	<!-- move up move to the side disappear -->
+	<div id='thirtyFour'>
+		<div class="grey move button34">
+			<h1>Click!</h1>
+		</div>
+	</div>
+
+	<!-- move up move to the side move back-->
+	<div id='thirtyFive'>
+		<div class="grey move button35">
+			<h1>Click!</h1>
+		</div>
+	</div>
+
+	<!-- move diag up disappear -->
+	<div id='thirtySix'>
+		<div class="grey move button36">
+			<h1>Click!</h1>
+		</div>
+	</div>
+
+	<!-- move up move side change color, back -->
+	<div id='thirtySeven'>
+		<div class="grey move button37">
+			<h1>Click!</h1>
+		</div>
+	</div>
+
+	<!-- move diag right, change color, back -->
+	<div id='fourtyTwo'>
+		<div class="grey move button42">
+			<h1>Click!</h1>
+		</div>
+	</div>
+
+	<div id='thirtyEight'>
+		<div class="grey move button38">
+			<h1>Click!</h1>
+		</div>
+	</div>
+
+	<!-- move diag left -->
+	<div id='thirtyNine'>
+		<div class="grey move button39">
+			<h1>Click!</h1>
+		</div>
+	</div>
+
+	<!-- move diag left, change color back -->
+	<div id='fourty'>
+		<div class="grey move button40">
+			<h1>Click!</h1>
+		</div>
+	</div>
+
+	<!-- move diag left disappear -->
+	<div id='fourtyOne'>
+		<div class="grey move button41">
+			<h1>Click!</h1>
+		</div>
+	</div>
+
+	<!-- move diag up right -->
+	<div id='fourtyThree'>
+		<div class="grey move button43">
+			<h1>Click!</h1>
+		</div>
+	</div>
+
+	<!-- move right diag, disappear -->
+	<div id='fourtyFour'>
+		<div class="grey move button44">
+			<h1>Click!</h1>
+		</div>
+	</div>
+
+
+	<!-- shake toward right -->
+	<div id='fourtyFive'>
+		<div class="grey move button45">
+			<h1>Click!</h1>
+		</div>
+	</div>	
+
+	<!-- shake toward left -->
+	<div id='fourtySix'>
+		<div class="grey move button46">
+			<h1>Click!</h1>
+		</div>
+	</div>	
+
+	<!-- shake toward right color change -->
+	<div id='fourtySeven'>
+		<div class="grey move button47">
+			<h1>Click!</h1>
+		</div>
+	</div>	
+
+	<!-- shake toward left color change -->
+	<div id='fourtyEight'>
+		<div class="grey move button48">
+			<h1>Click!</h1>
+		</div>
+	</div>
+
+	<!-- exaggerated shake -->
+	<div id='fourtynine'>
+		<div class="grey move button49">
+			<h1>Click!</h1>
+		</div>
+	</div>
+
+	<!-- Fade in/out -->
+	<div id='fifty'>
+		<div class="grey move button50">
+			<h1>Click!</h1>
+		</div>
+	</div>
+
+	<!-- fade in out slow -->
+	<div id='fiftyOne'>
+		<div class="grey move button51">
+			<h1>Click!</h1>
+		</div>
+	</div>	
+
+	<!-- fade in out fast -->
+	<div id='fiftyTwo'>
+		<div class="grey move button52">
+			<h1>Click!</h1>
+		</div>
+	</div>	
+
+	<!-- fade in out color change -->
+	<div id='fiftyThree'>
+		<div class="grey move button53">
+			<h1>Click!</h1>
+		</div>
+	</div>
+
+	<!-- fade in out height change -->
+	<div id='fiftyFour'>
+		<div class="grey move button54">
+			<h1>Click!</h1>
+		</div>
+	</div>	
+
+	<!-- fade in out width change -->
+	<div id='fiftyFive'>
+		<div class="grey move button55">
+			<h1>Click!</h1>
+		</div>
+	</div>	
+
+	<!-- fade in out width and height change -->
+	<div id='fiftySix'>
+		<div class="grey move button56">
+			<h1>Click!</h1>
+		</div>
+	</div>
+
+	<!-- fade in out width and height change -->
+	<div id='fiftySeven'>
+		<div class="grey move button57">
+			<h1>Click!</h1>
+		</div>
+	</div>	
+
+	<!-- rotate 180 -->
+	<div id='fiftyEight'>
+		<div class="grey move button58">
+			<h1>Click!</h1>
+		</div>
+	</div>	
+
+	<!-- rotate 180 change color -->
+	<div id='fiftyNine'>
+		<div class="grey move button59">
+			<h1>Click!</h1>
+		</div>
+	</div>	
+
+	<!-- rotate change color disappear -->
+	<div id='sixty'>
+		<div class="grey move button60">
+			<h1>Click!</h1>
+		</div>
+	</div>	
+
+	<!-- text changes color -->
+	<div id='sixtyOne'>
+		<div class="lightGrey button61">
+			<h1>Click!</h1>
+		</div>
+	</div>
+
+	<!-- font size changes randomly -->
+	<div id='sixtyTwo'>
+		<div class="grey button62">
+			<h1>Click!</h1>
+		</div>
+	</div>	
+
+	<!-- whole button gets bigger -->
+	<div id='sixtyThree'>
+		<div class="grey button63">
+			<h1>Click!</h1>
+		</div>
+	</div>	
+
+	<!-- whole button gets smaller -->
+	<div id='sixtyFour'>
+		<div class="grey button64">
+			<h1>Click!</h1>
+		</div>
+	</div>	
+
+	<!-- reveals an "o" when clicked -->
+	<div id='sixtyFive'>
+		<div class="grey button65">
+			<h1>Click!</h1>
+		</div>
+	</div>	
+
+	<!-- pulse -->
+	<div id='sixtyEight'>
+		<div class="grey button68">
+			<h1>Click!</h1>
+		</div>
+	</div>
+
+	<!-- scroll bottom -->
+	<div id='sixtyNine'>
+		<div class="grey button69">
+			<h1>Click!</h1>
+		</div>
+	</div>
+
+	<!-- scroll top -->
+	<div id='seventy'>
+		<div class="grey button70">
+			<h1>Click!</h1>
+		</div>
+	</div>	
+
+	<!-- console uses window.alert -->
+	<div id='seventyTwo'>
+		<div class="grey button72">
+			<h1>Click!</h1>
+		</div>
+		<!-- <h3 class="text72">check console</h3> -->
+	</div>	
+
+	<!-- turns screen black -->
+	<div id='eightyFour'>
+		<div class="grey button84">
+			<h1>Click!</h1>
+		</div>
+		<!-- <h3 class="text72">check console</h3> -->
+	</div>	
+
+	<!-- blurs screen while pressed -->
+	<div id='eightyFive'>
+		<div class="grey button85">
+			<h1>Click!</h1>
+		</div>
+		<!-- <h3 class="text72">check console</h3> -->
+	</div>
+
+	<div id='eightySix'>
+		<div class="grey button86">
+			<h1>Click!</h1>
+		</div>
+		<!-- <h3 class="text72">check console</h3> -->
+	</div>	
+
+	<div id='eightySeven'>
+		<div class="grey button87">
+			<p id="date"></p>
+		</div>
+		<!-- <h3 class="text72">check console</h3> -->
+	</div>
+
+	<div id='eightyEight'>
+		<div class="grey button88">
+			<h1>Click!</h1>
+		</div>
+		<!-- <h3 class="text72">check console</h3> -->
+	</div>	
+
+	<div id='eightyNine'>
+		<div class="grey button89">
+			<h1>Click!</h1>
+		</div>
+		<!-- <h3 class="text72">check console</h3> -->
+	</div>	
+
+	<div id='ninety'>
+		<div class="grey button90">
+			<h1>Click!</h1>
+		</div>
+		<!-- <h3 class="text72">check console</h3> -->
+	</div>
+
+	<div id='ninetyOne'>
+		<div class="grey button91">
+			<h1>Click!</h1>
+		</div>
+		<!-- <h3 class="text72">check console</h3> -->
+	</div>	
+
+	<div id='ninetyTwo'>
+		<div class="grey button92">
+			<h1>Click!</h1>
+		</div>
+		<!-- <h3 class="text72">check console</h3> -->
+	</div>	
+
+	<div id='ninetyThree'>
+		<div class="grey button93">
+			<h1>Click!</h1>
+		</div>
+		<!-- <h3 class="text72">check console</h3> -->
+	</div>
+
+	<div id='ninetyFour'>
+		<div class="grey button94">
+			<h1>Click!</h1>
+		</div>
+		<!-- <h3 class="text72">check console</h3> -->
+	</div>	
+
+	<div id='ninetyFive'>
+		<div class="grey button95">
+			<h1>Click!</h1>
+		</div>
+		<!-- <h3 class="text72">check console</h3> -->
+	</div>	
+
+	<div id='ninetySix'>
+		<div class="grey button96">
+			<h1>Click!</h1>
+		</div>
+		<!-- <h3 class="text72">check console</h3> -->
+	</div>	
+
+	<div id='ninetySeven'>
+		<div class="grey button97">
+			<h1>Click!</h1>
+		</div>
+		<!-- <h3 class="text72">check console</h3> -->
+	</div>	
+
+	<div id='ninetyEight'>
+		<div class="grey button98">
+			<h1>Click!</h1>
+		</div>
+		<!-- <h3 class="text72">check console</h3> -->
+	</div>	
+
+	<div id='ninetyNine'>
+		<div class="grey button99">
+			<h1>Click!</h1>
+		</div>
+		<!-- <h3 class="text72">check console</h3> -->
+	</div>	
+
+	<div id='hundred'>
+		<div class="perspective">
+			<div class="move grey button100">
+				<h1>Click!</h1>
+			</div>
+		</div>
+		<!-- <h3 class="text72">check console</h3> -->
+	</div>	
+
+
+
+
+
+
+
+
+	<div id='eightyTwo'>
+		<div class="grey button82">
+			<h1>Click!</h1>
+		</div>
+		<h3 class="text82">Text Change!</h3>
+		<!-- <h3 class="text72">check console</h3> -->
+	</div>
+
+	<div id='eightyThree'>
+		<div class="grey button83">
+			<h1>Click!</h1>
+		</div>
+		<h3 class="text83">Text Change!</h3>
+		<!-- <h3 class="text72">check console</h3> -->
+	</div>
+
+	<!-- gets long, moves -->
+	<div id='seventyFour'>
+		<div class="grey move button74">
+			<h1>Click!</h1>
+		</div>
+		<!-- <h3 class="text72">check console</h3> -->
+	</div>	
+
+	<!-- moves around everywhere -->
+	<div id='seventyFive'>
+		<div class="grey button75">
+			<h1>Click!</h1>
+		</div>
+		<!-- <h3 class="text72">check console</h3> -->
+	</div>	
+
+
+	<!-- big zoom -->
+	<div id='seventySix'>
+		<div class="grey button76">
+			<h1>Click!</h1>
+		</div>
+		<!-- <h3 class="text72">check console</h3> -->
+	</div>	
+
+	<div id='seventySeven'>
+		<div class="grey button77">
+			<h1>Click!</h1>
+		</div>
+		<!-- <h3 class="text72">check console</h3> -->
+	</div>	
+
+	<div id='seventyEight'>
+		<div class="grey button78">
+			<h1>Click!</h1>
+		</div>
+		<!-- <h3 class="text72">check console</h3> -->
+	</div>		
+
+
+	<!-- command screen says hi -->
+	<div id='seventyOne'>
+		<div class="grey button71">
+			<h1>Click!</h1>
+		</div>
+		<h3 class="text71">check console</h3>
+	</div>	
+
+	<!-- line height decreases -->
+	<div id='sixtySix'>
+		<div class="grey button66">
+			<h1>Click!</h1>
+		</div>
+
+		<div class="text66">
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mattis risus turpis, nec efficitur nunc volutpat sed. Duis lobortis ligula ante, et consequat mi laoreet eu. Vestibulum diam elit, dapibus sed egestas eu, aliquet eu turpis. In vel lacinia mi. Nam eu felis pellentesque, venenatis purus at, gravida dolor.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mattis risus turpis, nec efficitur nunc volutpat sed. Duis lobortis ligula ante, et consequat mi laoreet eu. Vestibulum diam elit, dapibus sed egestas eu, aliquet eu turpis. In vel lacinia mi. Nam eu felis pellentesque, venenatis purus at, gravida dolor.</p>
+		</div>
+	</div>	
+
+	<!-- line height increases -->
+	<div id='sixtySeven'>
+		<div class="grey button67">
+			<h1>Click!</h1>
+		</div>
+
+		<div class="text67">
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mattis risus turpis, nec efficitur nunc volutpat sed. Duis lobortis ligula ante, et consequat mi laoreet eu. Vestibulum diam elit, dapibus sed egestas eu, aliquet eu turpis. In vel lacinia mi. Nam eu felis pellentesque, venenatis purus at, gravida dolor.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mattis risus turpis, nec efficitur nunc volutpat sed. Duis lobortis ligula ante, et consequat mi laoreet eu. Vestibulum diam elit, dapibus sed egestas eu, aliquet eu turpis. In vel lacinia mi. Nam eu felis pellentesque, venenatis purus at, gravida dolor.</p>
+		</div>
+	</div>	
+
+	<div id='eighty'>
+		<div class="grey button80">
+			<h1>Click!</h1>
+		</div>
+
+		<div class="text80">
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mattis risus turpis, nec efficitur nunc volutpat sed. Duis lobortis ligula ante, et consequat mi laoreet eu. Vestibulum diam elit, dapibus sed egestas eu, aliquet eu turpis. In vel lacinia mi. Nam eu felis pellentesque, venenatis purus at, gravida dolor.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mattis risus turpis, nec efficitur nunc volutpat sed. Duis lobortis ligula ante, et consequat mi laoreet eu. Vestibulum diam elit, dapibus sed egestas eu, aliquet eu turpis. In vel lacinia mi. Nam eu felis pellentesque, venenatis purus at, gravida dolor.</p>
+		</div>
+	</div>	
+
+	<div id='seventyNine'>
+		<div class="grey button79">
+			<h1>Click!</h1>
+		</div>
+		<!-- <h3 class="text72">check console</h3> -->
+	</div>
+
+	<div id='eightyOne'>
+		<div class="grey button81">
+			<h1>unbind</h1>
+		</div>
+		<!-- <h3 class="text72">check console</h3> -->
+	</div>
+
+	<!-- deletes all html -->
+	<div id='seventyThree'>
+		<div class="grey button73">
+			<h1>Click!</h1>
+		</div>
+	</div>	
+
+
+
+</body>
+
+</html>

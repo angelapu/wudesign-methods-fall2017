@@ -1,0 +1,80 @@
+<html>
+<head>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+	<style type="text/css">
+
+		#test {
+			width: 200px;
+			height: 200px;
+			display: inline-block;
+		}
+
+
+
+		/*#follower {
+			height: 300px;
+			width: 300px;
+			position: absolute;
+			float:left;
+		}
+*/
+	</style>
+
+	<script type="text/javascript">
+
+		// function getOpacity() {
+		// 	var num = 1;
+		// 	for (var i = 0; i<=9; i++) {
+		// 		num= num-.1;
+		// 	}
+		// 	return num;
+		// }
+
+
+		$(document).ready(function(){
+
+			$('div').hover(function(){
+				$(this).animate({opacity:0});
+			});
+
+			$(document).click(function(){
+				$('div').animate({opacity:1});
+			});
+
+		});
+
+	</script>
+
+
+</head>
+
+
+<body id="BodyID">
+
+	<div id="test" style="background-color: #005ef7"></div>
+	<div id="test" style="background-color: #1b69e8"></div>
+	<div id="test" style="background-color: #3c7fea"></div>
+	<div id="test" style="background-color: #508ced"></div>
+	<div id="test" style="background-color: #679bef"></div>
+	<div id="test" style="background-color: #81abef"></div>
+	<div id="test" style="background-color: #9abcf4"></div>
+	<div id="test" style="background-color: #b3cef9"></div>
+	<div id="test" style="background-color: #d6e5fc"></div>
+	<div id="test" style="background-color: #c9d5e8"></div>
+	<div id="test" style="background-color: #9ca7ba"></div>
+	<div id="test" style="background-color: #c1c1c1"></div>
+	<div id="test" style="background-color: #005ef7"></div>
+	<div id="test" style="background-color: #1b69e8"></div>
+	<div id="test" style="background-color: #3c7fea"></div>
+	<div id="test" style="background-color: #508ced"></div>
+	<div id="test" style="background-color: #679bef"></div>
+	<div id="test" style="background-color: #81abef"></div>
+
+	
+
+
+
+</body>
+</html>

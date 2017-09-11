@@ -1,0 +1,13 @@
+{
+  "entrypoints" : [
+    {
+      "name" : "First Page",
+      "file" : "index.html"
+    },
+    {
+      "name" : "second Page",
+      "file" : "index2.html"
+    }
+    
+  ]
+}
