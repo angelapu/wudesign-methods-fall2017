@@ -3,16 +3,16 @@
     {
       "name" : "generation",
       "file" : "generation.html"
-    }
+    },
 
     {
       "name" : "iteration",
       "file" : "iteration.html"
-    }
+    },
      {
       "name" : "manipulation",
       "file" : "manipulation.html"
-    }
+    },
 
     {
       "name" : "randomization",
