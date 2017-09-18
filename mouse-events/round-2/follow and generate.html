@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+	<style type="text/css">
+
+		#follower {
+			height: 300px;
+			width: 300px;
+			position: absolute;
+			float:left;
+		}
+
+		.color {
+			height: 300px;
+			width: 300px;
+			background-color: #86efd7;
+			position: absolute;
+		}
+
+		.page {
+			height: 100%;
+			margin: 0px;
+		}
+
+	</style>
+
+</head>
+
+
+<body>
+	<div class="page">
+		<div class="color" id="follower"></div>
+	</div>
+
+	<script>
+
+		$(document).ready(function(){
+		// function drawCircle {
+		// 	var canvas = document.getElementById("myCanvas");
+		// 	var radius = Math.floor(Math.random()*10);
+		// }
+
+		// $(function(){
+		// 	var fadeDelay = 1000;
+		// 	var fadeDuration = 1000;
+		// 	    $(document).click(function(e){
+		// 		var div = $('<div class="image-wrapper">')
+		// 		.css({
+		// 			"left": e.pageX + 'px',
+		// 			"top": e.pageY + 'px'
+		// 		})
+		// 		.append($('<div class="here">'))
+		// 		.appendTo(document.body);
+
+		// 		setTimeout(function() {
+		// 			div.addClass('fade-out');
+		// 			setTimeout(function() { div.remove(); }, fadeDuration);
+		// 		}, fadeDelay);
+		// 	    });
+		// });
+
+		function getColor() {
+			var letter = '123456789ABCDEF';
+			var color = '#';
+			for (var i=0; i<6; i++) {
+				color = color+letter[Math.floor(Math.random()*14)];
+			}
+			return color;
+		}
+
+		function getHeight() {
+			var height =2*(Math.floor(Math.random()*100));
+			var px = 'px';
+			return height + px;
+		}
+
+		function getWidth() {
+			var width =2*(Math.floor(Math.random()*100));
+			var px = 'px';
+			return width + px;	
+		}
+
+		$(document).bind('mousemove' , function(e) {
+			$('#follower').css({
+				left:  e.pageX,
+				top:   e.pageY
+			});
+		});
+
+		$(document).click(function(e) {
+			$('#follower').css('background-color',getColor());
+			$('#follower').css('z-index','100');
+		
+			var newSquare = $('<div class="color">');
+			newSquare.css({
+				left: e.pageX,
+				top: e.pageY,
+				// color: getColor();
+				// z-index:-5
+			});
+
+			$('.page').append(newSquare);
+
+
+			//CREATE A VARIABLE 
+			// $(document).append($('<div>', {class: 'color'}));
+		});
+
+		// $(document).mouseDown(function(){
+		// 	.append($('<div class="color">'))
+		// 	.appendTo(document.body);
+		// })
+
+		// $(document).on("click",function() {
+		// 	.append($('<div class="color">'))
+		// 	.appendTo(document.body);
+		// 	// $('color').css('background-color','black');
+		// });
+
+	});
+
+
+</script>
+
+</body>
+</html>

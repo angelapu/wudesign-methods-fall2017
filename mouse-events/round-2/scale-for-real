@@ -1,0 +1,137 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<div class="page">
+		<!-- <div id = "firstbox"></div> -->
+	</div>
+
+
+
+	<style type="text/css">
+
+
+		.wrapper {
+			display: inline-block;
+			height: 100%;
+			width: 100%
+		}
+		.box {
+			width: 100px;
+			height: 100px;
+			background-color: red;
+			display: inline-block;
+			margin: 10px;
+		}
+
+		.manipulation {
+			border-radius: 100%;
+		}
+
+	</style>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script>
+
+		// $("#firstbox").on("click", function(){
+		// 	$("<div>", {id:"firstbox"}).appendTo(".wrapper").css({"border-radius": "100%"})
+
+		// });
+
+		function getColor() {
+			var letter = '123456789ABCDEF';
+			var color = '#';
+			for (var i=0; i<6; i++) {
+				color = color+letter[Math.floor(Math.random()*14)];
+			}
+			return color;
+		}
+		
+		function getHeight() {
+			var height =5*(Math.floor(Math.random()*100));
+			var em = 'em';
+			return height + em;
+		}
+
+		function getWidth() {
+			var width =5*(Math.floor(Math.random()*100));
+			var em = 'em';
+			return width + em;	
+		}
+		
+
+		$(document).click(function(e){
+			var newSquare = $('<div class="box">');
+			newSquare.css({
+				left: e.pageX,
+				top: e.pageY,
+				background: getColor()
+				// z-index:-5
+			});
+
+			$('.page').append(newSquare);
+
+
+
+			
+
+			$('.box').animate({
+				width: getWidth(), 
+				height: getHeight()
+			}, "slow")
+			.animate({
+				height: "10px", 
+				width: "10px"
+			}, "slow")
+
+			$('.box').animate({
+				width: getWidth(), 
+				height: getHeight()
+			}, "slow")
+
+			$('.box').animate({
+				width: "10px", 
+				height: "10px"
+			}, "slow")
+
+			$('.box').animate({
+				width: "10px", 
+				height: "10px"
+			}, "slow");
+
+	});
+
+
+// $ ("#firstbox") .each(function(){
+// 	$(this).each(function(){
+// 		$(this).animate({
+// 			width: "200em", 
+// 			height: "200em"
+// 		}, "slow")
+// 		.animate({
+// 			height: "10px", 
+// 			width: "10px"
+// 		}, "slow"); });
+// 	$(this).animate({
+// 		width: "200em", 
+// 		height: "200em"
+// 	}, "slow")
+// 	$(this).animate({
+// 		width: "10px", 
+// 		height: "10px"
+// 	}, "slow")
+// 	$(this).animate({
+// 		width: "10px", 
+// 		height: "10px"
+// 	}, "slow") });
+
+// for (var i = "#firstbox".height ; i >= 11; i++) {
+// 	width[i]
+// }
+</script>
+
+
+</body>
+</html>

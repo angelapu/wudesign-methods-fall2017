@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+	<style type="text/css">
+
+		.box {
+			height: 300px;
+			width: 300px;
+			background-color: #86efd7;
+			/*position: absolute;*/
+			display: inline-block;
+		}
+
+		.newBox {
+			position: absolute;
+		}
+
+		.page {
+			height: 100em;
+		}
+
+	</style>
+
+</head>
+
+
+<body>
+	<div class="page">
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+	</div>
+	<script>
+
+		function getHeight() {
+			var height =5*(Math.floor(Math.random()*100));
+			var px = 'px';
+			return height + px;
+		}
+
+		function getWidth() {
+			var width =5*(Math.floor(Math.random()*100));
+			var px = 'px';
+			return width + px;	
+		}
+
+		function getColor() {
+			var letter = '123456789ABCDEF';
+			var color = '#';
+			for (var i=0; i<6; i++) {
+				color = color+letter[Math.floor(Math.random()*14)];
+			}
+			return color;
+		}
+
+		// function drawCircle {
+		// 	var canvas = document.getElementById("myCanvas");
+		// 	var radius = Math.floor(Math.random()*10);
+		// }
+
+		$(document).ready(function(e){
+
+			$('.box').hover (function () {
+				$(this).css("height",getHeight());
+				$(this).css("width",getWidth());
+			});
+
+			$(document).click(function(e){
+				$('.page').css('background-color',getColor());
+				$('.box').css('background-color',getColor());
+
+				var newSquare = $('<div class="box newBox">');
+				newSquare.css({
+					left: e.pageX,
+					top: e.pageY,
+					height:getHeight(),
+					width:getWidth()
+					// position: absolute;
+				// color: getColor();
+				// z-index:-5
+			});
+
+				$('.page').append(newSquare);
+
+			})
+		});
+
+
+
+	</script>
+
+</body>
+</html>

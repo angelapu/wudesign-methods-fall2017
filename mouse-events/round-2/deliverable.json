@@ -1,0 +1,54 @@
+{
+  "entrypoints" : [
+    {
+      "name" : "chasing",
+      "file" : "chasing.html"
+    },
+
+    {
+      "name" : "floating balls",
+      "file" : "floatingBalls.html"
+    },
+
+     {
+      "name" : "floating balls v02",
+      "file" : "floatingBallsV02.html"
+    },
+
+    {
+      "name" : "floating balls v03",
+      "file" : "floatingBallsV03.html"
+    },
+
+    {
+      "name" : "follow and generate",
+      "file" : "follow-and-generate.html"
+    },
+
+    {
+      "name" : "rotate",
+      "file" : "rotate.html"
+    }, 
+    
+    {
+      "name" : "rotate v02",
+      "file" : "crazyRotate.html"
+    }
+
+    {
+      "name" : "width-height v02",
+      "file" : "width-height-changeV02.html"
+    },
+
+    {
+      "name" : "widthHeightV03",
+      "file" : "widthHeightV03.html"
+    }, 
+    
+    {
+      "name" : "scaleForReal",
+      "file" : "scale-for-real.html"
+    }
+    
+  ]
+}
