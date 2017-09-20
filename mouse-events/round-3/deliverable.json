@@ -13,12 +13,12 @@
      {
       "name" : "3",
       "file" : "rotateAppendDelete.html"
-    }
+    },
 
-    // {
-    //   "name" : "floating balls v03",
-    //   "file" : "floatingBallsV03.html"
-    // },
+    {
+      "name" : "4",
+      "file" : "controlledRotate.html"
+    }
 
     // {
     //   "name" : "follow and generate",
