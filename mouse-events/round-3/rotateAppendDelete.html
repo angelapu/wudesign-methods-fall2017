@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+	<style type="text/css">
+
+		.box {
+			height: 10px;
+			width: 30vw;
+			background-color: #86efd7;
+			/*position: absolute;*/
+			transition: 2s;
+			display: inline-flex;
+		}
+
+		.box.selected {
+			/*transform: rotate(90deg);*/
+			/*animation-name: rotate;
+			animation-duration: 2s;*/
+		}
+
+		.page {
+			height: 100vh;
+		}
+
+		/*@keyframes rotate {
+			0% {transform: rotate(0deg);}
+			100% {transform: rotate(360deg);}
+		}*/
+
+	</style>
+
+</head>
+
+
+<body>
+	<div class="page">
+	</div>
+	<script>
+
+		function getHeight() {
+			var height =2*(Math.floor(Math.random()*100));
+			var px = 'px';
+			return height + px;
+		}
+
+		function getWidth() {
+			var width =5*(Math.floor(Math.random()*100))+200;
+			var px = 'px';
+			return width + px;	
+		}
+
+		function getColor() {
+			var letter = '123456789ABCDEF';
+			var color = '#';
+			for (var i=0; i<6; i++) {
+				color = color+letter[Math.floor(Math.random()*14)];
+			}
+			return color;
+		}
+
+		// function drawCircle {
+		// 	var canvas = document.getElementById("myCanvas");
+		// 	var radius = Math.floor(Math.random()*10);
+		// }
+
+		$(document).ready(function(){
+
+			var numSquare = (Math.floor(Math.random()*100));
+
+			// var numSquare = 10;
+
+			$(window).load(function() {
+				for (var i=0; i<numSquare; i++){
+					var height = 2*(Math.floor(Math.random()*100));
+					var width =5*(Math.floor(Math.random()*100))+200;
+					
+					// var x = Math.random()
+
+					var newSquare = $('<div class="box">');
+					newSquare.css({
+						// left: ,
+						// top: ,
+						height:height,
+						width:width,
+						background:getColor()
+					});
+
+					$('.page').append(newSquare);
+
+				}
+
+				$('.box').mouseover(function () {
+				// $(this).toggleClass("selected");
+				$(this).css('background-color',getColor());
+				$(this).css('width',getWidth());
+				$(this).css('height',getHeight());
+				
+				var num = 180-(Math.floor(Math.random()*360));
+				// console.log(n)
+				$(this).css('transform','rotate('+num+'deg)');
+
+			});
+
+				$(document).click(function(){
+					// $('.page').css('background-color',getColor());
+
+					if (numSquare==0) {
+						newNum = (Math.floor(Math.random()*100));
+
+						for (var i=0; i<newNum; i++){
+							var height = 2*(Math.floor(Math.random()*100));
+							var width =5*(Math.floor(Math.random()*100))+200;
+
+							var newSquare = $('<div class="box">');
+							newSquare.css({
+								// left: ,
+								// top: ,
+								height:height,
+								width:width,
+								background:getColor()
+							})
+							$('.page').append(newSquare);
+						};
+
+					}
+				})
+
+
+				$('.box').click(function(){
+					$(this).remove();
+					numSquare--;
+				})
+
+
+
+			});
+
+		})
+
+
+
+	</script>
+
+</body>
+</html>
