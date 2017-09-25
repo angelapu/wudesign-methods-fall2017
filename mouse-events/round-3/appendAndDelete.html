@@ -98,30 +98,16 @@
 
 			});
 
-				$(document).click(function(){
-					var height = 2*(Math.floor(Math.random()*100));
-					var width =5*(Math.floor(Math.random()*100))+200;
-					var numSquare = (Math.floor(Math.random()*100)) + 10;
-					// var x = Math.random()
+			$(document).click(function(){
+				$('.page').css('background-color',getColor());
+			})
 
-					var newSquare = $('<div class="box">');
-					newSquare.css({
-						// left: ,
-						// top: ,
-						height:height,
-						width:width,
-						background:getColor()
-					});
-					$('.page').append(newSquare);
-
-				})
-
-			// $('.box').click(function(){
-			// 	$(this).remove();
-			// })
+			$('.box').click(function(){
+				$(this).remove();
+			})
 
 
-		});
+			});
 
 		});
 

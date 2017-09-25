@@ -7,7 +7,7 @@
 
     {
       "name" : "2",
-      "file" : "crazyRotate2.html"
+      "file" : "crazyRotateV02.html"
     },
 
      {
@@ -18,6 +18,25 @@
     {
       "name" : "4",
       "file" : "controlledRotate.html"
+    },
+     
+     {
+      "name" : "5",
+      "file" : "appendAndDelete.html"
+    },
+
+    {
+      "name" : "6",
+      "file" : "noScaleRotate.html"
+    },
+    {
+      "name" : "7",
+      "file" : "RotateClickReset.html"
+    },
+
+     {
+      "name" : "8",
+      "file" : "RotateControlledScale.html"
     }
     
   ]

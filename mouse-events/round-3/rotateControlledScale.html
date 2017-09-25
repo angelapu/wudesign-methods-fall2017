@@ -2,32 +2,28 @@
 <html>
 <head>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="/audiojs/audio.min.js"></script>
+	<script>
+		audiojs.events.ready(function() {
+			var as = audiojs.createAll();
+		});
+	</script>
+
 
 	<style type="text/css">
 
 		.box {
-			height: 10px;
-			width: 30vw;
+			height: 10vw;
+			width: 10vw;
 			background-color: #86efd7;
 			/*position: absolute;*/
 			transition: 2s;
 			display: inline-flex;
 		}
 
-		.box.selected {
-			/*transform: rotate(90deg);*/
-			/*animation-name: rotate;
-			animation-duration: 2s;*/
-		}
-
 		.page {
 			height: 100vh;
 		}
-
-		/*@keyframes rotate {
-			0% {transform: rotate(0deg);}
-			100% {transform: rotate(360deg);}
-		}*/
 
 	</style>
 
@@ -38,17 +34,10 @@
 	<div class="page">
 	</div>
 	<script>
-
-		function getHeight() {
-			var height =2*(Math.floor(Math.random()*100));
-			var px = 'px';
-			return height + px;
-		}
-
-		function getWidth() {
-			var width =5*(Math.floor(Math.random()*100))+200;
-			var px = 'px';
-			return width + px;	
+		function getSize() {
+			// var size =5*(Math.floor(Math.random()*100))+200;
+			// var px = 'px';
+			// return size + px;	
 		}
 
 		function getColor() {
@@ -60,6 +49,11 @@
 			return color;
 		}
 
+		var height = '10vw';
+		var width = '10vw';
+
+		var numBox = Math.floor(Math.random()*100);
+
 		// function drawCircle {
 		// 	var canvas = document.getElementById("myCanvas");
 		// 	var radius = Math.floor(Math.random()*10);
@@ -67,19 +61,20 @@
 
 		$(document).ready(function(){
 
+
+
 			$(window).load(function() {
-				for (var i=0; i<20; i++){
-					var height = 2*(Math.floor(Math.random()*100));
-					var width =5*(Math.floor(Math.random()*100))+200;
-					var numSquare = (Math.floor(Math.random()*100)) + 10;
+				for (var i=0; i<numBox; i++){
+					var height = '10vw';
+					var width = '10vw';
 					// var x = Math.random()
 
 					var newSquare = $('<div class="box">');
 					newSquare.css({
 						// left: ,
 						// top: ,
-						height:height,
-						width:width,
+						height:200,
+						width:200,
 						background:getColor()
 					});
 
@@ -88,33 +83,25 @@
 
 				$('.box').mouseover(function () {
 				// $(this).toggleClass("selected");
+				var boxScale = Math.floor(Math.random()*10);
 				$(this).css('background-color',getColor());
-				$(this).css('width',getWidth());
-				$(this).css('height',getHeight());
+				$(this).css('width',((this.width)*boxScale);
+				$(this).css('height','');
 				
 				var num = 180-(Math.floor(Math.random()*360));
 				// console.log(n)
 				$(this).css('transform','rotate('+num+'deg)');
 
+				$(this).css('width', 'height');
+				$(this).css('height','width');
+
 			});
 
 				$(document).click(function(){
-					var height = 2*(Math.floor(Math.random()*100));
-					var width =5*(Math.floor(Math.random()*100))+200;
-					var numSquare = (Math.floor(Math.random()*100)) + 10;
-					// var x = Math.random()
-
-					var newSquare = $('<div class="box">');
-					newSquare.css({
-						// left: ,
-						// top: ,
-						height:height,
-						width:width,
-						background:getColor()
-					});
-					$('.page').append(newSquare);
-
-				})
+					$('.box').css('background-color','#86efd7');
+					$('.box').css('height','300px');
+					$('.box').css('width','300px');
+				});
 
 			// $('.box').click(function(){
 			// 	$(this).remove();
