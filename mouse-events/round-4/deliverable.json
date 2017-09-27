@@ -1,0 +1,13 @@
+{
+  "entrypoints" : [
+    {
+      "name" : "1",
+      "file" : "Framing-1.html"
+    },
+    {
+      "name" : "2",
+      "file" : "Framing-2.html"
+    }
+    
+  ]
+}

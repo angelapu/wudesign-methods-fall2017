@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+	<style type="text/css">
+
+		body {
+			font-family: sans-serif;
+		}
+
+		.box {
+			background-color: #86efd7;
+			/*position: absolute;*/
+			transition: 2s;
+			display: inline-flex;
+		}
+
+		.page {
+			height: 100vh;
+			align-content:center;
+			flex-direction: column;
+			align-content: center;
+			display: cover;
+			margin-left: 9vw;
+			margin-right: 7vw;
+		}
+
+		.start {
+			background: black;
+			text-align: center;
+
+		}
+
+	</style>
+
+</head>
+
+
+<body>
+	<!-- <div class="start">
+		<h1 style="color: white">
+			Hover and click to interact with the boxes
+		</h1>
+	</div> -->
+
+	<div class="page">
+	</div>
+	<script>
+
+		function getHeight() {
+			var height =10+3*(Math.floor(Math.random()*100));
+			var px = 'px';
+			return height + px;
+		}
+
+		function getWidth() {
+			var width =10+3*(Math.floor(Math.random()*100))+200;
+			var px = 'px';
+			return width + px;	
+		}
+
+		function getColor() {
+			var letter = '123456789ABCDEF';
+			var color = '#';
+			for (var i=0; i<6; i++) {
+				color = color+letter[Math.floor(Math.random()*14)];
+			}
+			return color;
+		}
+
+		var dimension = 19.5+'vw';
+		var load = false;
+		var numBox = Math.floor(Math.random()*100);
+		var black = '#0a0a0a';
+
+		// function drawCircle {
+		// 	var canvas = document.getElementById("myCanvas");
+		// 	var radius = Math.floor(Math.random()*10);
+		// }
+
+		$(document).ready(function(){
+
+			// setTimeout(function(){
+				
+			// },1000);
+			
+			window.alert("Hover and click to interact with the boxes");
+
+			$('.page').css('background','white');
+
+			$(window).load(function() {
+				for (var i=0; i<numBox; i++){
+					// var height = 2*(Math.floor(Math.random()*100));
+					// var width =5*(Math.floor(Math.random()*100))+200;
+					var numSquare = (Math.floor(Math.random()*100)) + 10;
+					// var x = Math.random()
+
+					var newSquare = $('<div class="box">');
+					newSquare.css({
+						// left: ,
+						// top: ,
+						height:dimension,
+						width:dimension,
+						background:getColor()
+					});
+
+					$('.page').append(newSquare);
+				}
+
+				$('.box').mouseover(function () {
+				// $(this).toggleClass("selected");
+				$(this).css('background-color',getColor());
+				$(this).css('width',getWidth());
+				$(this).css('height',getHeight());
+				
+				var num = 180-(Math.floor(Math.random()*360));
+				// console.log(n)
+				$(this).css('transform','rotate('+num+'deg)');
+
+			});
+
+				$(document).click(function(){
+					$('.box').css('background-color',getColor());
+					$('.box').css('height','19.5vw');
+					$('.box').css('width','19.5vw');
+				});
+
+
+			});
+
+			// };
+
+		});
+
+
+
+	</script>
+
+</body>
+</html>
