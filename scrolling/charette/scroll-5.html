@@ -1,0 +1,112 @@
+<!-- scale when scrolling -->
+
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/skrollr/0.6.30/skrollr.min.js"></script>
+
+	<style type="text/css">
+
+		body {
+			font-family: sans-serif;
+			/*background: black;*/
+		}
+
+		.box {
+			background-color: #86efd7;
+			/*position: absolute;*/
+			transition: 2s;
+			width: 100vw;
+			height: 10vh;
+			margin: 0px;
+			display: inline-flex;
+		}
+
+		.page {
+			height: 200vh;
+			align-content:center;
+			align-content: center;
+			display: cover;
+			/*margin-left: 9vw;
+			margin-right: 7vw;*/
+			/*background: black;*/
+		}
+
+	</style>
+
+</head>
+
+
+<body>
+
+
+	<div id="skrollr-body">
+		<div class="box" data-0="transform:scale(.2);" data-top="transform:scale(2);"></div>
+	</div>
+
+
+	<script type="text/javascript">
+		function getHeight() {
+			var height =10+3*(Math.floor(Math.random()*100));
+			var px = 'px';
+			return height + px;
+		}
+
+		function getWidth() {
+			var width =10+3*(Math.floor(Math.random()*100))+200;
+			var px = 'px';
+			return width + px;	
+		}
+
+		function getColor() {
+			var letter = '123456789ABCDEF';
+			var color = '#';
+			for (var i=0; i<6; i++) {
+				color = color+letter[Math.floor(Math.random()*14)];
+			}
+			return color;
+		}
+
+		var dimension = 19.5+'vw';
+		var load = false;
+		var numBox = Math.floor(Math.random()*100);
+		var black = '#0a0a0a';
+
+		// $(document).ready(function(){
+
+		// 	// setTimeout(function(){
+
+		// 	// },1000);
+
+
+		// 	// $('.page').css('background','white');
+
+		// 	$(window).load(function() {
+		// 		for (var i=0; i<5; i++){
+		// 			// var height = 2*(Math.floor(Math.random()*100));
+		// 			// var width =5*(Math.floor(Math.random()*100))+200;
+		// 			var numSquare = (Math.floor(Math.random()*100)) + 10;
+		// 			// var x = Math.random()
+
+		// 			var newSquare = $('<div class="box">');
+		// 			newSquare.css({
+		// 				// left: ,
+		// 				// top: ,
+		// 				background:getColor()
+		// 			});
+
+		// 			$('.page').append(newSquare);
+		// 		}
+		// 	})
+		// });
+	</script>
+
+
+
+	<script type="text/javascript" src="skrollr.min.js"></script>
+	<script type="text/javascript">
+		var s = skrollr.init();
+	</script>
+</body>
+</html>
