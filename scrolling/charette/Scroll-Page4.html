@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link href="https://fonts.googleapis.com/css?family=Lobster|Nosifer|Slabo+27px" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/skrollr/0.6.30/skrollr.min.js"></script>
+
+	<style type="text/css">
+		html{
+			height: 100%;
+			width: 100%;
+
+		}
+
+		.container {
+			height: 100vh;
+			width:100vw;
+			position: relative;
+			display: inline-block;
+		}
+
+		body {
+			font-family: sans-serif;
+			/*background: black;*/
+			overflow: scroll;
+		}
+
+		.box {
+			background-color: #86efd7;
+			/*position: absolute;*/
+			transition: 2s;
+			width: 70vh;
+			height: 70vh;
+			margin: 0px;
+			/*display: inline-flex;*/
+			position: absolute;
+		}
+
+		.box-2 {
+			background-color: #86efd7;
+			top: 0px;
+			position: absolute;
+			transition: 2s;
+			width: 70vh;
+			height: 70vh;
+			margin: 0px;
+			/*position: relative;*/
+			z-index: -100;
+			display: inline-block;
+			/*display: inline-flex;*/
+		}
+
+		.page {
+			height: 200vh;
+			align-content:center;
+			align-content: center;
+			display: cover;
+			/*margin-left: 9vw;
+			margin-right: 7vw;*/
+			/*background: black;*/
+		}
+
+	</style>
+
+</head>
+
+
+<body>
+
+	<div class="container">
+
+		<div class="box-2" style="width:90vw;height:10vw; background-color:AntiqueWhite; position:relative; top: 200px; left: 100px;transition: 2s; margin: 20px;" data-top-top="border-radius:100%; transform:rotate(0deg);" data-center-bottom="border-radius:50%; background:cyan; transform:rotate(100deg);"></div>
+		<!-- 92 -->	
+
+		<div class="box-2" style="width:20vw;height:20vw; background-color:AntiqueWhite; position:relative; top: 200px; left: 200px;transition: 2s;" data-top-top="opacity:.2; transform:rotateX(0deg);" data-center-bottom="opacity:1; background:linear-gradient(white,turquoise); transform:rotateX(50deg);"></div>
+		<!--93 -->
+
+		<div class="box-2" style="width:20vw;height:20vw; background-color:AntiqueWhite; position:relative; top: 200px; left: 200px;transition: 2s;" data-top-top="transform:skewX(0deg);" data-center-bottom="transform:skewX(50deg);"></div>
+		<!--94 -->
+
+		<div class="box-2" style="width:20vw;height:20vw; background-color:AntiqueWhite; position:relative; top: 200px; left: 200px;transition: 2s;"  data-bottom-bottom="transform:skewY(50deg);" data-top-top="transform:skewY(0deg);"></div>
+		<!--95 -->
+
+		<div class="box-2" style="width:20vw;height:20vw; background-color:AntiqueWhite; position:relative; top: 200px; left: 200px;transition: 1s;"  data-bottom-bottom="transform:skew(50deg, 50deg);" data-top-top="transform:skew(0deg, 50deg);"></div>
+		<!--96 -->
+
+		<div class="box-2" style="width:20vw;height:20vw; background-color:AntiqueWhite; position:relative; top: 200px; left: 200px;transition: 1s;"  data-bottom-bottom="transform:skew(-50deg, -50deg);" data-top-top="transform:skew(0deg, 0deg);"></div>
+		<!--97 -->
+
+		<div class="box-2" style="width:20vw;height:20vw; background-color:AntiqueWhite; position:relative; top: 200px; left: 200px;transition: 1s;"  data-bottom-bottom="transform: matrix(1, -0.3, 0, 1, 0, 0);" data-top-top="transform: matrix(0,0,0,0,0, 0);"></div>
+		<!--98 -->
+
+		<div class="box-2" style="width:20vw;height:20vw; background-color:Turquoise; position:relative; top: 200px; left: 200px;transition: 1s;" data-top-top="top:500px;" data-bottom-bottom="top:-500px;"></div>
+		<!--99 -->
+
+
+
+	</div>
+	<div style="height:80vh;"></div>
+
+</div>
+
+
+<script type="text/javascript">
+	function getHeight() {
+		var height =10+3*(Math.floor(Math.random()*100));
+		var px = 'px';
+		return height + px;
+	}
+
+	function getWidth() {
+		var width =10+3*(Math.floor(Math.random()*100))+200;
+		var px = 'px';
+		return width + px;	
+	}
+
+	function getColor() {
+		var letter = '123456789ABCDEF';
+		var color = '#';
+		for (var i=0; i<6; i++) {
+			color = color+letter[Math.floor(Math.random()*14)];
+		}
+		return color;
+	}
+
+	var dimension = 19.5+'vw';
+	var load = false;
+	var numBox = Math.floor(Math.random()*100);
+	var black = '#0a0a0a';
+
+	$(document).ready(function(){
+
+		$(window).load(function() {
+			for (var i=0; i<5; i++){
+					// var height = 2*(Math.floor(Math.random()*100));
+					// var width =5*(Math.floor(Math.random()*100))+200;
+					var numSquare = (Math.floor(Math.random()*100)) + 10;
+					// var x = Math.random()
+
+					var newSquare = $('<div class="box">');
+					newSquare.css({
+						// left: ,
+						// top: ,
+						background:getColor()
+					});
+
+					$('.page').append(newSquare);
+				}
+
+			})
+
+		$(window).scroll(function(){
+			$('.box').css({
+					// height:getHeight(),
+					// width:getWidth()
+					background:getColor()
+				})
+
+			$('.nineteen').animate({left: 1000}, 410);
+			$('.twentyThree').css({
+				background:getColor(),
+				height:getHeight()
+			})
+
+			$('.twentyFour').css({
+				background:getColor(),
+				width:getWidth()
+			})
+			
+
+
+	});
+</script>
+
+
+
+<script type="text/javascript" src="skrollr.min.js"></script>
+<script type="text/javascript">
+	var s = skrollr.init();
+</script>
+</body>
+</html>

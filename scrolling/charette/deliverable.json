@@ -36,7 +36,17 @@
     },{
       "name" : "10",
       "file" : "scroll-Page3.html"
-    }
+    },
+
+    {
+      "name" : "11",
+      "file" : "scroll-Page4.html"
+    },
+
+    {
+      "name" : "12",
+      "file" : "gradient.html"
+    },
     
   ]
 }

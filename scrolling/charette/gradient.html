@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link href="https://fonts.googleapis.com/css?family=Lobster|Nosifer|Slabo+27px" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/skrollr/0.6.30/skrollr.min.js"></script>
+
+	<style type="text/css">
+		html{
+			height: 100%;
+			width: 100%;
+
+		}
+
+		.container {
+			height: 100vh;
+			width:100vw;
+			position: relative;
+			display: inline-block;
+		}
+
+		body {
+			font-family: sans-serif;
+			/*background: black;*/
+			overflow: scroll;
+		}
+
+		.box {
+			background-color: #86efd7;
+			/*position: absolute;*/
+			transition: 2s;
+			width: 70vh;
+			height: 70vh;
+			margin: 0px;
+			/*display: inline-flex;*/
+			position: absolute;
+		}
+
+		.box-2 {
+			background-color: #86efd7;
+			top: 0px;
+			position: absolute;
+			transition: 2s;
+			width: 70vh;
+			height: 70vh;
+			margin: 0px;
+			/*position: relative;*/
+			z-index: -100;
+			display: inline-block;
+			/*display: inline-flex;*/
+		}
+
+		.page {
+			height: 200vh;
+			align-content:center;
+			align-content: center;
+			display: cover;
+			/*margin-left: 9vw;
+			margin-right: 7vw;*/
+			/*background: black;*/
+		}
+
+	</style>
+
+</head>
+
+
+<body>
+
+	<div class="container">
+
+		<div class="box-2" style="height:1000vh; width: 100vw;background: cover; background-color:Turquoise; position:relative; transition: 1s;" data-0="background-image:linear-gradient(0deg, hsl(0, 100%, 50%), hsl(40, 50%, 50%));" data-5000="background-image:linear-gradient(3600deg, hsl(360, 100%, 50%), hsl(400, 100%, 50%));"></div>
+		<!--98 -->
+
+	</div>
+
+</div>
+
+<script type="text/javascript" src="skrollr.min.js"></script>
+<script type="text/javascript">
+	var s = skrollr.init();
+</script>
+</body>
+</html>
