@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link href="https://fonts.googleapis.com/css?family=Lobster|Nosifer|Slabo+27px" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/skrollr/0.6.30/skrollr.min.js"></script>
+
+	<style type="text/css">
+	html{
+		height: 100%;
+		width: 100%;
+
+	}
+
+	.container {
+		height: 100vh;
+		width:100vw;
+		position: fixed;
+		display: inline-block;
+	}
+
+	body {
+		font-family: sans-serif;
+		/*background: black;*/
+		overflow: scroll;
+	}
+
+	.box {
+		background-color: #86efd7;
+		/*position: absolute;*/
+		transition: 2s;
+		width: 70vh;
+		height: 70vh;
+		margin: 0px;
+		/*display: inline-flex;*/
+		position: absolute;
+	}
+
+	.box-2 {
+		background-color: #86efd7;
+		top: 0px;
+		position: absolute;
+		transition: 2s;
+		width: 70vh;
+		height: 70vh;
+		margin: 0px;
+		/*position: relative;*/
+		z-index: -100;
+		display: inline-block;
+		/*display: inline-flex;*/
+	}
+
+	.page {
+		height: 200vh;
+		align-content:center;
+		align-content: center;
+		display: cover;
+			/*margin-left: 9vw;
+			margin-right: 7vw;*/
+			/*background: black;*/
+		}
+
+		.rotate {
+			position: fixed;
+			top: 50%;
+			left: 50%;
+			height:10vh;
+			width: 30vw;
+			transition: 2s;
+			background: cyan;
+		}
+
+		.transformContainer {
+			padding-left: 100px;
+			position: fixed;
+			height: 30vh;
+
+		}
+
+		.tear {
+			width: 50px;
+			height: 50px;
+			border-radius: 0 50% 50% 50%;
+			background-color: blue;
+			transform: rotate(45deg);
+			margin-top: 20px;
+			transition: 2s;
+
+		}
+
+		.container2 {
+			display: inline-block;
+			width: 500px;
+			height: 500px;
+			transition: 2s;
+			position: absolute;
+			top: 100px;
+			left: 200px;
+			border:1px;
+		}
+
+	</style>
+
+</head>
+
+
+<body>
+
+	<!-- LOOK AT GREENSOCK LIBRARY -->
+
+	<div class="container">
+		
+		<div class="container2" style="margin-top: 100px; transition: 3s;" data-top-center="transform:rotate(0deg);" data-center-bottom="transform:rotate(360deg);">
+		<div class="tear one"></div>
+		</div>
+
+		<div class="container2" style="margin-top: 100px; width: 50vh; height: 50vh;" data-top-center="transform:rotate(0deg);" data-center-bottom="transform:rotate(360deg);">
+		<div class="tear two"></div>
+		</div>
+
+		<div class="container2" style="margin-top: 100px; width: 20vh; height: 20vh; transition: 1s;" data-top-center="transform:rotate(0deg);" data-center-bottom="transform:rotate(360deg);">
+		<div class="tear three"></div>
+
+		<div class="container2" style="margin-top: 100px; width: 10vh; height: 10vh; transition: .5s;" data-top-center="transform:rotate(0deg);" data-center-bottom="transform:rotate(360deg);">
+		<div class="tear four"></div>
+		</div>
+
+	</div>
+
+</div>
+
+
+<script type="text/javascript">
+	function getHeight() {
+		var height =10+3*(Math.floor(Math.random()*100));
+		var px = 'px';
+		return height + px;
+	}
+
+	function getWidth() {
+		var width =10+3*(Math.floor(Math.random()*100))+200;
+		var px = 'px';
+		return width + px;	
+	}
+
+	function getColor() {
+		var letter = '123456789ABCDEF';
+		var color = '#';
+		for (var i=0; i<6; i++) {
+			color = color+letter[Math.floor(Math.random()*14)];
+		}
+		return color;
+	}
+
+	var dimension = 19.5+'vw';
+	var load = false;
+	var numBox = Math.floor(Math.random()*100);
+	var black = '#0a0a0a';
+
+	$(document).ready(function(){
+
+		$(window).scroll(function(){
+			$('.tear.one').css({
+				background:getColor(),
+				width:getHeight(),
+				height:getHeight()
+			});
+
+			$('.tear.two').css({
+				background:getColor(),
+				width:getHeight(),
+				height:getHeight()
+			});
+
+			$('.tear.three').css({
+				background:getColor(),
+				width:getHeight(),
+				height:getHeight()
+			});
+
+			$('.tear.four').css({ 
+				background:getColor(),
+				width:getHeight(),
+				height:getHeight()
+			});
+
+		});
+
+	});
+</script>
+
+
+
+<script type="text/javascript" src="skrollr.min.js"></script>
+<script type="text/javascript">
+	var s = skrollr.init();
+</script>
+</body>
+</html>

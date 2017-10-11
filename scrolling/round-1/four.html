@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link href="https://fonts.googleapis.com/css?family=Lobster|Nosifer|Slabo+27px" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/skrollr/0.6.30/skrollr.min.js"></script>
+
+	<style type="text/css">
+	html{
+		height: 100%;
+		width: 100%;
+
+	}
+
+	.container {
+		height: 100vh;
+		width:100vw;
+		position: relative;
+		display: inline-block;
+	}
+
+	body {
+		font-family: sans-serif;
+		/*background: black;*/
+		overflow: scroll;
+	}
+
+	.box {
+		background-color: #86efd7;
+		/*position: absolute;*/
+		transition: 2s;
+		width: 70vh;
+		height: 70vh;
+		margin: 0px;
+		/*display: inline-flex;*/
+		position: absolute;
+	}
+
+	.box-2 {
+		background-color: #86efd7;
+		top: 0px;
+		position: absolute;
+		transition: 2s;
+		width: 70vh;
+		height: 70vh;
+		margin: 0px;
+		/*position: relative;*/
+		z-index: -100;
+		display: inline-block;
+		/*display: inline-flex;*/
+	}
+
+	.page {
+		height: 200vh;
+		align-content:center;
+		align-content: center;
+		display: cover;
+			/*margin-left: 9vw;
+			margin-right: 7vw;*/
+			/*background: black;*/
+		}
+
+		.rotate {
+			position: fixed;
+			top: 50%;
+			left: 50%;
+			height:10vh;
+			width: 30vw;
+			transition: 2s;
+			background: cyan;
+		}
+
+		.transformContainer {
+			padding-left: 100px;
+			position: fixed;
+			height: 30vh;
+
+		}
+
+	</style>
+
+</head>
+
+
+<body>
+
+	<div class="container">
+		<div style=""></div>
+
+		<!-- 	<div class="transformContainer" data-top-center="transform:rotate(0deg)skew(0deg);" data-center-bottom="transform:rotate(280deg)skew(150deg); color:green;"> -->
+			<div class="rotate one" data-top-center="height:10vh; transform:rotate(0deg)skew(0deg);" data-center-bottom="height:30vh; transform:rotate(280deg)skew(150deg); color:green;"></div><!-- </div> -->
+<!-- 
+		<div class="rotate" data-top-center="transform:rotateX(0deg);" data-center-bottom="transform:rotateX(-280deg); color:cyan;"></div>
+
+		<div class="rotate" data-top-center="transform:rotateY(0deg);" data-center-bottom="transform:rotateY(-280deg); color:cyan;"></div> -->
+
+	</div>
+	<div style="height:80vh;"></div>
+
+</div>
+
+
+<script type="text/javascript">
+	function getHeight() {
+		var height =10+3*(Math.floor(Math.random()*100));
+		var px = 'px';
+		return height + px;
+	}
+
+	function getWidth() {
+		var width =10+3*(Math.floor(Math.random()*100))+200;
+		var px = 'px';
+		return width + px;	
+	}
+
+	function getColor() {
+		var letter = '123456789ABCDEF';
+		var color = '#';
+		for (var i=0; i<6; i++) {
+			color = color+letter[Math.floor(Math.random()*14)];
+		}
+		return color;
+	}
+
+	var dimension = 19.5+'vw';
+	var load = false;
+	var numBox = Math.floor(Math.random()*100);
+	var black = '#0a0a0a';
+
+	$(document).ready(function(){
+
+		$(window).scroll(function(){
+			$('.rotate.one').css({
+					// height:getHeight(),
+					// width:getWidth()
+					background:getColor()
+				})
+		});
+
+	});
+</script>
+
+
+
+<script type="text/javascript" src="skrollr.min.js"></script>
+<script type="text/javascript">
+	var s = skrollr.init();
+</script>
+</body>
+</html>

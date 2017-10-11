@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link href="https://fonts.googleapis.com/css?family=Lobster|Nosifer|Slabo+27px" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/skrollr/0.6.30/skrollr.min.js"></script>
+
+	<style type="text/css">
+	html{
+		height: 100%;
+		width: 100%;
+
+	}
+
+	.container {
+		height: 100vh;
+		width:100vw;
+		position: relative;
+		display: inline-block;
+	}
+
+	body {
+		font-family: sans-serif;
+		/*background: black;*/
+		overflow: scroll;
+	}
+
+	.back {
+		width: 100vw;
+		height: 1000vh;
+		background: #000066;
+		/*transition: 2s;*/
+	}
+
+	</style>
+
+</head>
+
+
+<body>
+
+	<!-- LOOK AT GREENSOCK LIBRARY -->
+
+		<div class="back" data-top="background:#000066;" data-bottom="background:#ccf5ff;"></div>
+
+		<!-- <div id="skrollr-body" data-bottom="background-color:rgb(0,0,0)" data-top="background-color:rgb(255,255,255)"></div> -->
+
+
+<script type="text/javascript">
+	function getHeight() {
+		var height =10+3*(Math.floor(Math.random()*100));
+		var px = 'px';
+		return height + px;
+	}
+
+	function getWidth() {
+		var width =10+3*(Math.floor(Math.random()*100))+200;
+		var px = 'px';
+		return width + px;	
+	}
+
+	function getColor() {
+		var letter = '123456789ABCDEF';
+		var color = '#';
+		for (var i=0; i<6; i++) {
+			color = color+letter[Math.floor(Math.random()*14)];
+		}
+		return color;
+	}
+
+	var dimension = 19.5+'vw';
+	var load = false;
+	var numBox = Math.floor(Math.random()*100);
+	var black = '#0a0a0a';
+
+	$(document).ready(function(){
+
+		$(window).scroll(function(){
+			$('.rotate.one').css({
+
+				width:getWidth(),
+				background:getColor()
+			});
+
+			$('.rotate.two').css({
+
+				width:getWidth(),
+				background:getColor()
+			});
+
+			$('.rotate.three').css({
+
+				width:getWidth(),
+				background:getColor()
+			});
+
+			$('.rotate.four').css({
+
+				width:getWidth(),
+				background:getColor()
+			});
+
+		});
+
+	});
+</script>
+
+
+
+<script src="skrollr.min.js"></script> 
+<script type="text/javascript">
+	var s = skrollr.init();
+</script>
+</body>
+</html>
