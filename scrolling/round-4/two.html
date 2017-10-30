@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link href="https://fonts.googleapis.com/css?family=Lobster|Nosifer|Slabo+27px" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/skrollr/0.6.30/skrollr.min.js"></script>
+
+	<style type="text/css">
+	html{
+		height: 100%;
+		width: 100%;
+
+	}
+
+	.container {
+		position: fixed;
+		/*margin-left: 20vw;*/
+		top: 70%;
+		left: 50%;
+	}
+
+	body {
+		font-family: sans-serif;
+		/*background: black;*/
+		overflow: scroll;
+		height: 1700px;
+	}
+
+	
+
+	.tear {
+		width: 100px;
+		height: 100px;
+		border-radius: 0 50% 50% 50%;
+		background-color: blue;
+		transform: translate(-50px, -50px) rotate(45deg);
+		margin-top: 20px;
+		transition: 2s;
+		position: absolute;
+	}
+
+	.container2 {
+		/*display: inline-block;*/
+		width: 2px;
+		height: 2px;
+		/*transition: 2s;*/
+		position: absolute;
+		/*border:solid;*/
+		margin-top: 0px;
+		left: 200px;
+
+	}
+
+	.triangle {
+		width: 0;
+		height: 0;
+		border-left: 50px solid transparent;
+		border-right: 50px solid transparent;
+		border-bottom: 100px solid;
+		border-bottom-color:cyan;
+	}
+
+</style>
+
+</head>
+
+
+<body>
+
+	<!-- LOOK AT GREENSOCK LIBRARY -->
+
+	<div class="container">
+		
+		<!-- <div class="container2 tear1" style="">
+			<div class="tear one" style="left: -200px;"></div>
+		</div>
+
+		<div class="container2 tear4" style="">
+			<div class="tear one" style="left: -300px;"></div>
+		</div>
+
+		<div class="container2 tear2" style="left: -200px;">
+			<div class="tear two" style="left: 200px;"></div>
+		</div>
+
+		<div class="container2 tear3" style=" left: -200px;">
+			<div class="tear three" style="left: 300px;"></div>
+		</div>
+		
+		<div class="container2 tear4" style=" left: -200px;">
+			<div class="tear three" style="left: 270px;"></div>
+		</div>
+
+		<div class="container2 tear5" style="left: -200px;">
+			<div class="tear two" style="left: 270px;"></div>
+		</div>
+
+		<div class="container2 tear6" style="left: -200px;">
+			<div class="tear two" style="left: 270px;"></div>
+		</div> -->
+
+		<div class="container2 triangle1" style="left: -200px;">
+			<div class="triangle triangleOne" style="left: 270px;"></div>
+		</div>
+
+		<div class="container2 triangle2" style="left: 200px;">
+			<div class="triangle triangleTwo" style="left: 270px;"></div>
+		</div>
+
+		<div class="container2 triangle2" style="left: 200px;">
+			<div class="triangle triangleTwo" style="left: 270px;"></div>
+		</div>
+
+		<div class="container2 triangle4" style="left: 300px;">
+			<div class="triangle triangleFour"></div>
+		</div>
+
+
+
+
+		<div class="container2 triangle3" style="" data-0="left:-200px; top:-400px;" data-400="left:500px;" data-800="left:1000px;" data-1000="left:0px;">
+			<div class="triangle triangleThree" style=""></div>
+		</div>
+
+		<div class="container2 triangle3" style="" data-0="left:0px; top:-400px;" data-400="left:1000px;" data-800="left:500px;" data-1000="left:-200px;">
+			<div class="triangle triangleThree" style=""></div>
+		</div>
+
+
+
+		<div class="container2 triangle3" style="" data-0="left:-200px; top:-400px;" data-400="left:-500px;" data-800="left:-1000px;" data-1000="left:0px;">
+			<div class="triangle triangleThree" style=""></div>
+		</div>
+
+		<div class="container2 triangle3" style="" data-0="left:0px; top:-400px;" data-400="left:-1000px;" data-800="left:-500px;" data-1000="left:-200px;">
+			<div class="triangle triangleThree" style=""></div>
+		</div>
+	
+
+	</div>
+
+
+	<script type="text/javascript">
+		function getHeight() {
+			var height =10+3*(Math.floor(Math.random()*100));
+			var px = 'px';
+			return height + px;
+		}
+
+		function getWidth() {
+			var width =10+3*(Math.floor(Math.random()*100))+200;
+			var px = 'px';
+			return width + px;	
+		}
+
+		function getColor() {
+			var letter = '123456789ABCDEF';
+			var color = '#';
+			for (var i=0; i<6; i++) {
+				color = color+letter[Math.floor(Math.random()*14)];
+			}
+			return color;
+		}
+
+		function getRandomNum() {
+			return Math.floor(Math.random()*9);
+		}
+
+		function getScale() {
+			return Math.floor(Math.random()+1);
+		}
+
+		var blues = ["#40E0D0", "#00BFFF", "#00CED1", "#000080", "#6495ED", "#87CEEB", "#ADD8E6", "#00FFFF", "#2C5197", "#D9D9F3"];
+
+		function debounce(func, wait, immediate) {
+			var timeout;
+			return function() {
+				var context = this, args = arguments;
+				var later = function() {
+					timeout = null;
+					if (!immediate) func.apply(context, args);
+				};
+				var callNow = immediate && !timeout;
+				clearTimeout(timeout);
+				timeout = setTimeout(later, wait);
+				if (callNow) func.apply(context, args);
+			};
+		};
+
+		function setRotation(scrollTop) {
+			var perc = scrollTop/1000;
+			var rotation = perc*360;
+			return rotation;
+		}
+
+		function setRotation2(scrollTop) {
+			var perc = scrollTop/1000;
+			var rotation = perc*720;
+			return rotation;
+		}
+
+		function returnScroll(scrollTop) {
+			var perc = scrollTop/1000;
+			var shift = perc*100;
+			return shi
+
+		}
+
+		$(document).ready(function(){
+
+			var myEfficientFn = debounce(function() {
+
+				// var dimension = getHeight();
+				// $('.tear.one').css({
+				// 	background:blues[getRandomNum()],
+				// 	// width:dimension,
+				// 	// height:dimension
+				// });
+
+				$('.triangle').css({ 
+					borderBottomColor:getColor(),
+					// width:dimension,
+					// height:dimension
+				});
+
+				var px = 'px';
+				// $('.triangle').css({ 
+				// 	borderBottom:300+'px'
+				// 	// height:getScale()
+				// 	// height:dimension
+				// });
+
+
+
+						//no param gets scroll position
+
+						console.log("debounced");
+
+					}, 5);
+
+			$(window).scroll(myEfficientFn);
+			
+			var notDebounced = function(){
+				// $('.container2.tear1').css ({
+				// 	transform:'rotate('+setRotation($(window).scrollTop())+'deg)'
+				// });
+
+				$('.container2.triangle1').css ({
+					transform:'rotate('+(-(setRotation2($(window).scrollTop()+500)))+'deg)'
+				});
+
+				$('.container2.triangle2').css ({
+					transform:'rotate('+((setRotation2($(window).scrollTop())))+'deg)'
+				});
+
+				var currentPosition = $(window).scrollTop();
+				$ (window).scrollTop(currentPosition%1000);
+				console.log(currentPosition, $(window).scrollTop());
+			};
+
+			$(window).scroll(notDebounced);
+		});
+
+	</script>
+
+
+
+	<script type="text/javascript" src="skrollr.min.js"></script>
+<script type="text/javascript">
+	var s = skrollr.init();
+</script>
+</body>
+</html>
