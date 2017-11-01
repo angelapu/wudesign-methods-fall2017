@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
+	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/skrollr/0.6.30/skrollr.min.js"></script> -->
+
+	<style type="text/css">
+	html{
+		height: 100%;
+		width: 100%;
+
+	}
+
+	.container {
+		position: fixed;
+		/*margin-left: 20vw;*/
+		top: 70%;
+		left: 50%;
+	}
+
+	body {
+		font-family: sans-serif;
+		/*background: black;*/
+		overflow: scroll;
+		height: 1700px;
+		background: #012a6d;
+	}
+
+	/*can use visibility none, diplay none, or opacity*/
+
+	.tear {
+		width: 100px;
+		height: 100px;
+		border-radius: 0 50% 50% 50%;
+		background-color: blue;
+		transform: translate(-50px, -50px) rotate(225deg);
+		margin-top: 20px;
+		/*transition: .5s;*/
+		position: absolute;
+	}
+
+	.container2 {
+		/*display: inline-block;*/
+		width: 2px;
+		height: 2px;
+		/*transition: .1s;*/
+		position: absolute;
+		/*border:solid;*/
+		margin-top: 0px;
+		left: 200px;
+
+	}
+
+	.frame{
+		margin: -8px;
+		position: fixed;
+		width: 96.5vw;
+		height: 92.5vh;
+		border: 20px solid transparent;
+		border-image: linear-gradient(to bottom, #012a6d , white);
+		border-image-slice: 1;
+		background: transparent;
+		z-index: 100;
+	}
+
+	h3{
+		color: white;
+		font-family: 'Roboto Condensed', sans-serif;
+	}
+
+	.message {
+		position: absolute;
+		top: -10px;
+		left:-20px;
+		transition: 2s;
+		z-index: 100;
+	}
+
+</style>
+
+</head>
+
+
+<body>
+
+	<div class="frame"></div>
+
+	<!-- LOOK AT GREENSOCK LIBRARY -->
+
+	<div class="container">
+
+		<div class="message">
+		<h3>Scroll</h3>
+		</div>
+		
+		<div class="container2 tear1" style="left: 200px;">
+			<div class="tear one" style="left: -200px;"></div>
+		</div>
+
+		<div class="container2 tear7" style="left:100px;">
+			<div class="tear seven" style="left:-100px;"></div>
+		</div>
+
+		<div class="container2 tear2" style="left: -500px;">
+			<div class="tear two" style="left: 500px;"></div>
+		</div>
+
+		<div class="container2 tear3" style=" left: -300px;">
+			<div class="tear three" style="left: 300px;"></div>
+		</div>
+		
+		<div class="container2 tear4" style=" left: -100px;">
+			<div class="tear four" style="left: 100px;"></div>
+		</div>
+
+		<div class="container2 tear5" style="left: -400px;"> 
+			<div class="tear five" style="left: 400px;"></div>
+		</div>
+
+		<div class="container2 tear6" style="left: -200px;">
+			<div class="tear six" style="left: 200px;"></div>
+		</div>
+
+		<div class="container2 tear8" style="left:250px;">
+			<div class="tear eight" style="left:-250px;"></div>
+		</div>
+
+		<div class="container2 tear9" style="left:400px;">
+			<div class="tear nine" style="left:-400px;"></div>
+		</div>
+
+		<div class="container2 tear10" style="left:100px;">
+			<div class="tear ten" style="left:-100px;"></div>
+		</div>
+
+	</div>
+
+
+	<script type="text/javascript">
+		function getHeight() {
+			var height =10+3*(Math.floor(Math.random()*100));
+			var px = 'px';
+			return height + px;
+		}
+
+		function getWidth() {
+			var width =10+3*(Math.floor(Math.random()*100))+200;
+			var px = 'px';
+			return width + px;	
+		}
+
+		function getColor() {
+			var letter = '123456789ABCDEF';
+			var color = '#';
+			for (var i=0; i<6; i++) {
+				color = color+letter[Math.floor(Math.random()*14)];
+			}
+			return color;
+		}
+
+		function getRandomNum() {
+			return Math.floor(Math.random()*9);
+		}
+
+		// var blues = ["#4745EE", "#4D45E8", "#5246E3", "#5846DD", "#5D46D8", "#6347D2", "#6847CC", "#6E47C7", "#7448C1", "#7948BC", "#7F48B6", "#8449B0", "#8A49AB", "#8F49A5", "#954AA0", "#9B4A9A", "#A04A94", "#A64B8F", "AB4B89" ,"#B14B84", "#B64C7E", "#BC4C78", "#C14C73", "#C74D6D", "#CD4D68", "#D24D62", "#D84E5C", "#DD4E57", "#E34E51", "#E84F4C", "#EE4F46", "#F45041"];
+
+		var blues = ["#40E0D0", "#00BFFF", "#00CED1", "#000080", "#6495ED", "#87CEEB", "#ADD8E6", "#00FFFF", "#2C5197", "#D9D9F3","#E6E6FA", "#D8BFD8", "#DA70D6", "#9370DB", "#8A2BE2", "#4B0082", "#9932CC", "#FF00FF", "#FFC0CB", "#FFB6C1", "#FF69B4", "#FF1493", "	#DB7093", "#C71585", "#FFA07A", "#FA8072", "#F08080", "#B22222", "#DC143C", "#FF6347", "#DB7093", "#8B0000"];
+
+		function debounce(func, wait, immediate) {
+			var timeout;
+			return function() {
+				var context = this, args = arguments;
+				var later = function() {
+					timeout = null;
+					if (!immediate) func.apply(context, args);
+				};
+				var callNow = immediate && !timeout;
+				clearTimeout(timeout);
+				timeout = setTimeout(later, wait);
+				if (callNow) func.apply(context, args);
+			};
+		};
+
+		function setRotation(scrollTop) {
+			var perc = scrollTop/1000;
+			var rotation = perc*360;
+			return rotation;
+		}
+
+		function setRotation2(scrollTop) {
+			var perc = scrollTop/1000;
+			var rotation = perc*720;
+			return rotation;
+		}
+
+		function setRotation3(scrollTop) {
+			var perc = scrollTop/1000;
+			var rotation = perc*1080;
+			return rotation;
+		}
+
+		var counter = 0;
+		function incrementCounter() {
+			return counter++;
+		}
+
+		
+
+		$(document).ready(function(){
+
+			$(window).scroll(myVar);
+
+			var myEfficientFn = debounce(function() {
+
+				var dimension = getHeight();
+				$('.tear.one').css({
+					background:blues[getRandomNum()+counter],
+					// width:dimension,
+					// height:dimension
+				});
+
+				var dimension = getHeight();
+				$('.tear.two').css({
+					background:blues[getRandomNum()+counter],
+					// width:getHeight(),
+					// height:dimension
+				});
+
+				var dimension = getHeight();
+				$('.tear.three').css({
+					background:blues[getRandomNum()+counter],
+					// width:dimension,
+					// height:dimension
+				});
+
+				var dimension = getHeight();
+				$('.tear.four').css({ 
+					background:blues[getRandomNum()+counter],
+					// width:dimension,
+					// height:dimension
+				});
+
+				var dimension = getHeight();
+				$('.tear.five').css({ 
+					background:blues[getRandomNum()+counter],
+					// width:dimension,
+					// height:dimension
+				});
+
+				var dimension = getHeight();
+				$('.tear.six').css({ 
+					background:blues[getRandomNum()+counter],
+					// width:dimension,
+					// height:dimension
+				});
+
+				var dimension = getHeight();
+				$('.tear.seven').css({ 
+					background:blues[getRandomNum()+counter],
+					// width:dimension,
+					// height:dimension
+				});
+
+				var dimension = getHeight();
+				$('.tear.eight').css({ 
+					background:blues[getRandomNum()+counter],
+					// width:dimension,
+					// height:dimension
+				});
+
+				var dimension = getHeight();
+				$('.tear.nine').css({ 
+					background:blues[getRandomNum()+counter],
+					// width:dimension,
+					// height:dimension
+				});
+
+				var dimension = getHeight();
+				$('.tear.ten').css({ 
+					background:blues[getRandomNum()+counter],
+					// width:dimension,
+					// height:dimension
+				});
+
+						//no param gets scroll position
+
+						// console.log("debounced");
+
+					}, 5);
+
+			$(window).scroll(myEfficientFn);
+			
+			var notDebounced = function(){
+
+				//if container2 has a negative left, then should have a negative rotation				
+
+				$('.container2.tear1').css ({
+					// background:getColor(),
+					transform:'rotate('+((setRotation($(window).scrollTop())))+'deg)'
+				});
+
+				$('.container2.tear2').css ({
+					// background:blues[getRandomNum()],
+					transform:'rotate('+(-(setRotation($(window).scrollTop())))+'deg)'
+				});
+
+				$('.container2.tear3').css ({
+					// background:blues[getRandomNum()],
+					transform:'rotate('+(-(setRotation($(window).scrollTop())))+'deg)'
+				});
+
+				$('.container2.tear4').css ({
+					// background:blues[getRandomNum()],
+					transform:'rotate('+(-(setRotation3($(window).scrollTop())))+'deg)'
+				});
+
+				$('.container2.tear5').css ({
+					// background:blues[getRandomNum()],
+					transform:'rotate('+(-(setRotation2($(window).scrollTop())))+'deg)'
+				});
+
+				$('.container2.tear6').css ({
+					// background:blues[getRandomNum()],
+					transform:'rotate('+(-(setRotation2($(window).scrollTop()+500)))+'deg)'
+				});
+
+				$('.container2.tear7').css ({
+					// background:blues[getRandomNum()],
+					transform:'rotate('+((setRotation2($(window).scrollTop()+500)))+'deg)'
+				});
+
+				$('.container2.tear8').css ({
+					// background:blues[getRandomNum()],
+					transform:'rotate('+((setRotation2($(window).scrollTop())))+'deg)'
+				});
+
+				$('.container2.tear9').css ({
+					// background:blues[getRandomNum()],
+					transform:'rotate('+((setRotation3($(window).scrollTop())))+'deg)'
+				});
+
+				$('.container2.tear10').css ({
+					// background:blues[getRandomNum()],
+					transform:'rotate('+((setRotation2($(window).scrollTop())))+'deg)'
+				});
+
+				var currentPosition = $(window).scrollTop();
+
+				if (currentPosition>950 && currentPosition<999) {
+					counter++;
+					console.log(counter);
+					if (counter == 31) {
+						counter=0;
+					}
+				}
+
+				$ (window).scrollTop(currentPosition%1000);
+				// console.log(currentPosition, $(window).scrollTop());
+
+			};
+
+			$(window).scroll(notDebounced);
+
+			var myVar = setInterval(function() {
+
+				$('.message').css({
+					display:'none'
+				})
+
+			}, 2000);
+		});
+
+	</script>
+
+
+
+	<script type="text/javascript" src="skrollr.min.js"></script>
+<!-- <script type="text/javascript">
+	var s = skrollr.init();
+</script> -->
+</body>
+</html>
