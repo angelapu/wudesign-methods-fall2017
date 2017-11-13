@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Example loading and filtering of Weather Forecast Dataset</title>  
+  
+  <style type="text/css">
+
+  .box {
+    background-color: #86efd7;
+    /*position: absolute;*/
+    transition: 2s;
+    display: inline-flex;
+    margin-top: 0px;
+  }
+
+  .lineBreak {
+    width: 100vw;
+    height: 10px;
+  }
+
+  /*.page {
+    height: 100vh;
+    align-content:center;
+    flex-direction: column;
+    align-content: center;
+    display: cover;
+    margin-left: 9vw;
+    margin-right: 7vw;*/
+    /*background: black;*/
+    /*}*/
+
+  </style>
+
+</head>
+<body>
+  <div class="page">
+    <h1></h1>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script>
+
+    jQuery(function($){
+
+      var dataUrl = 'https://gist.githubusercontent.com/abesiemsen/916d376e77b659a793d9d8843e3287ee/raw/10-day-forecast.json';
+      
+      jQuery.getJSON(dataUrl, function(forecastData) {
+
+        console.log(forecastData);
+
+        Math.floor(Math.random()*10);
+        
+        var highTemps = forecastData.map(function(day){
+          return day.high.fahrenheit;
+        });
+
+        console.log(highTemps);
+
+        var random = Math.floor(Math.random()*10);
+
+        var individual = highTemps[random];
+        // console.log(individual);
+
+        function getColor() {
+          var letter = '123456789ABCDEF';
+          var color = '#';
+          for (var i=0; i<6; i++) {
+            color = color+letter[Math.floor(Math.random()*14)];
+          }
+          return color;
+        }
+
+        var dimension = 10+"px";
+
+        for (var i=0; i<10; i++){
+          for (var j=0; j<highTemps[i]; j++){
+
+            var newSquare = $('<div class="box">');
+            newSquare.css({
+              height:dimension,
+              width:dimension,
+              background:getColor()
+            });
+
+            $('.page').append(newSquare);
+          }
+
+          var lineBreak = ('<div class="lineBreak">');
+
+          $('.page').append(lineBreak);
+        }
+      });
+
+    });
+
+  </script>
+</body>
+</html>
