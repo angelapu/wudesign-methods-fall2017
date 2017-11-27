@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- <title>Example loading and filtering of Weather Forecast Dataset</title>   -->
+  
+  <style type="text/css">
+
+  .box {
+    /*background-color: #86efd7;*/
+    /*position: absolute;*/
+    transition: 2s;
+    display: inline-flex;
+    margin-top: 0px;
+  }
+
+  .lineBreak {
+    width: 100vw;
+    height: 10px;
+  }
+
+  .page {
+    height: 100vh;
+    margin-left: 9vw;
+    margin-right: 7vw;
+    display: inline-block;
+  }
+
+  body {
+    /*background-color: #012766;*/
+  }
+
+  h1 {
+    color: white;
+  }
+
+
+</style>
+
+</head>
+<body>
+  <div class="page">
+    
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.2.0/anime.js"></script>
+
+  <script>
+
+    $(document).ready(function(){
+
+  // var back = $("<div></div>");
+  // back.addClass("intro");
+  // $(".load").append(back);
+
+  var dataUrls = [
+    'https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22san%20francisco%2C%20ca%22)&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys',
+
+    'https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22chicago%2C%20il%22)&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys',
+
+    'https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22new%20york%2C%20ny%22)&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys'
+  ];
+
+  var dataResults = []
+
+    dataUrls.forEach(function(url){
+      jQuery.getJSON(url, function(data) {
+        console.log("data " + data);
+        dataResults.push(data);
+
+        var sunrise  = {};
+
+        // var sunrise1=0
+        let sunrise1=0;
+
+      if (dataResults.length == dataUrls.length) {
+
+        for (let i = 0; i < dataResults.length; i++) {
+          $.each(dataResults[i], function(i, query){
+            // sunrise[i] = query.results.channel.astronomy.sunrise;
+            // sunrise[i] = sunrise1;
+            // sunrise1 = query.results.channel.astronomy.sunrise;
+            console.log("sunrise " + sunrise[i]);
+          });
+
+        };
+
+        let sunrise1=sunrise[0];
+        let sunrise2=sunrise[1];
+        let sunrise3=sunrise[2];
+
+        console.log("sunrise " + sunrise1 + sunrise1 + sunrise3);
+        console.log("sunrise " + sunrise[0]+ sunrise[1]+ sunrise[2]);
+
+        // console.log(sunrise1);
+
+        var newForm = $('<div class="form-group"><label for="exampleFormControlSelect1">Sunrise</label><select class="form-control" id="exampleFormControlSelect1"><option>San Francisco '+sunrise[0]+'</option><option>Chicago '+sunrise[1]+'</option><option>New York '+sunrise[2]+'</option></select></div></form>');
+      
+        $('.page').append(newForm);
+
+
+      };
+
+    });
+  });
+
+});
+
+
+  </script>
+
+  </html>

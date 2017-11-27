@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- <title>Example loading and filtering of Weather Forecast Dataset</title>   -->
+  
+  <style type="text/css">
+
+  .box {
+    /*background-color: #86efd7;*/
+    /*position: absolute;*/
+    transition: 2s;
+    display: inline-flex;
+    margin-top: 0px;
+  }
+
+  .lineBreak {
+    width: 100vw;
+    height: 10px;
+  }
+
+  .page {
+    height: 100vh;
+    width: 90vw;
+    margin-left: 9vw;
+    margin-right: 7vw;
+    display: inline-block;
+  }
+
+  body {
+    background-color: #012766;
+    color: white;
+  }
+
+  h1 {
+  }
+
+  .hideRise {
+    /*display: none;*/
+    color: blue;
+  }
+
+  .hideSet {
+    /*display: none;*/
+  }
+
+  .initial {
+    position: absolute;
+    top: 30%;
+    left: 35%;
+  }
+
+
+</style>
+
+</head>
+<body>
+  <div class="page">
+
+    <div class="initial">
+    <h1>Find out the sunset and sunrise time</h1>
+
+  <button class="riseSelect">Display Sunrise</button>
+  <button class="setSelect">Display Sunset</button>
+
+  </div>
+
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.2.0/anime.js"></script>
+
+  <script>
+
+    $(document).ready(function(){
+
+  // var back = $("<div></div>");
+  // back.addClass("intro");
+  // $(".load").append(back);
+
+  var dataUrls = [
+  'https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22san%20francisco%2C%20ca%22)&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys',
+
+  'https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22chicago%2C%20il%22)&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys',
+
+  'https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22new%20york%2C%20ny%22)&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys'
+  ];
+
+  var dataResults = []
+
+  dataUrls.forEach(function(url){
+    jQuery.getJSON(url, function(data) {
+      console.log("data " + data);
+      dataResults.push(data);
+
+      let sunrise  = [];
+      let sunset  = [];
+
+
+      if (dataResults.length == dataUrls.length) {
+
+        for (let i = 0; i < dataResults.length; i++) {
+          $.each(dataResults[i], function(i, query){
+            sunrise[i] = query.results.channel.astronomy.sunrise;
+            sunset[i] = query.results.channel.astronomy.sunset;
+            
+            // $('.page').append("sunset " + sunset[i]);
+
+
+          });
+
+
+
+        };
+
+        // var newLocation = $('<div class="form-group"><label for="exampleFormControlSelect1">City</label><select class="form-control" id="exampleFormControlSelect1"><option>'+dataResults[0]+'</option><option>'+dataResults[1]+'</option><option>'+dataResults[2]+'</option></select></div></form>');
+
+        // var newForm = $('<div class="hideRise form-group"><label for="exampleFormControlSelect1">Sunrise</label><select class="form-control" id="exampleFormControlSelect1"><option>'+sunrise[0]+'</option><option>'+sunrise[1]+'</option><option>'+sunrise[2]+'</option></select></div></form>');
+
+        // var newSunset = $('<div class="hideSet form-group"><label for="exampleFormControlSelect1">Sunset</label><select class="form-control" id="exampleFormControlSelect1"><option>'+sunset[0]+'</option><option>'+sunset[1]+'</option><option>'+sunset[2]+'</option></select></div></form>');
+
+        // $('.page').append(sunrise[0],sunrise[1],sunrise[2]);
+
+        console.log("sunrise " + sunrise[0] + sunrise[1] + sunrise[2]);
+        // console.log("sunset " + sunset[i]);
+
+        // $('.page').append(newLocation);
+
+        $('.riseSelect').click(function() {
+        $('.page').append('<h1 class="hideSet">' + sunset[0] + sunset[1] +sunset[2] + '</h1>');
+          // $('.hideRise').css('display','block');
+          console.log('clicked');
+        });
+
+        $('.setSelect').click(function() {
+        $('.page').append('<h1 class="hideRise">' + sunrise[0] + sunrise[1] +sunrise[2] + '</h1>');
+          console.log('clicked');
+        });
+      };
+
+    });
+  });
+
+});
+
+
+</script>
+
+</html>
