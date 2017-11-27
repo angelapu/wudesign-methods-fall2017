@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Example loading and filtering of Weather Forecast Dataset</title>  
+  
+  <style type="text/css">
+
+  .box {
+    background-color: #86efd7;
+    /*position: absolute;*/
+    transition: 2s;
+    display: inline-flex;
+    margin-top: 0px;
+  }
+
+  .lineBreak {
+    width: 100vw;
+    height: 10px;
+  }
+
+  .page {
+    height: 100vh;
+    margin-left: 9vw;
+    margin-right: 7vw;
+    display: inline-block;
+  }
+
+
+</style>
+
+</head>
+<body>
+  <div class="page">
+    <h1></h1>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.2.0/anime.js"></script>
+
+  <script>
+
+    jQuery(function($){
+
+      var dataUrl = 'https://impact.stlouisco.com/resource/buwa-z5d8.json';
+      
+      jQuery.getJSON(dataUrl, function(birthData) {
+
+        console.log(birthData);
+        var bosnia = birthData.map(function(object){
+          return object.bosnia_and_herzegovina;
+        });
+        console.log(bosnia);
+        // console.log(bosnia[1]);
+
+        var china = birthData.map(function(object){
+          return object.china_excluding_hong_kong_and_taiwan;
+        });
+        console.log(china);
+        
+        // var highTemps = forecastData.map(function(day){
+        //   return day.high.fahrenheit;
+        // });
+
+        // var lowTemps = forecastData.map(function(day){
+        //   return day.low.fahrenheit;
+        // });
+
+        // console.log(highTemps);
+
+        var random = Math.floor(Math.random()*10);
+
+        // var individual = highTemps[random];
+        // console.log(individual);
+
+        function getColor() {
+          var letter = '123456789ABCDEF';
+          var color = '#';
+          for (var i=0; i<6; i++) {
+            color = color+letter[Math.floor(Math.random()*14)];
+          }
+          return color;
+        }
+
+        var blues = ["#40E0D0", "#00BFFF", "#00CED1", "#000080", "#6495ED", "#87CEEB", "#ADD8E6", "#00FFFF", "#2C5197", "#D9D9F3","#E6E6FA", "#D8BFD8", "#DA70D6", "#9370DB", "#8A2BE2", "#4B0082", "#9932CC", "#FF00FF", "#FFC0CB", "#FFB6C1", "#FF69B4", "#FF1493", " #DB7093", "#C71585", "#FFA07A", "#FA8072", "#F08080", "#B22222", "#DC143C", "#FF6347", "#DB7093", "#8B0000"];
+
+        var dimension = 180+"px";
+
+        for (let i=0; i<7; i++){ //let will be in the scope of what its supposed to do
+          // for (var j=0; j<highTemps[i]; j++){
+
+            var newSquare = $('<div class="box">');
+            newSquare.css({
+              height:dimension,
+              width:dimension,
+              background:blues[bosnia[i]%32],
+              // transform:'rotate('bosnia[i]+'deg)'
+            });
+            
+            console.log(bosnia[i]);
+            $('.page').append(newSquare);
+          // }
+
+          var lineBreak = ('<div class="lineBreak">');
+
+          $('.page').append(lineBreak);
+
+          $('.box').mouseover(function() {
+            $(this).css('background-color',getColor());
+            $(this).css('transform','rotate('+bosnia[i]+'deg)');
+            console.log("ROTATION DEG");
+            console.log(bosnia[i]);
+          });
+
+          $('newSquare').css('transform','rotate('+bosnia[i]%360+'deg)');
+
+        }
+
+      });
+
+    });
+
+  </script>
+
+  </html>

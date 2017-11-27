@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- <title>Example loading and filtering of Weather Forecast Dataset</title>   -->
+  
+  <style type="text/css">
+
+  .box {
+    background-color: #86efd7;
+    /*position: absolute;*/
+    transition: 2s;
+    /*display: inline-flex;*/
+    margin-top: 0px;
+    position: absolute;
+  }
+
+  .lineBreak {
+    width: 100vw;
+    height: 10px;
+  }
+
+  .page {
+    height: 100vh;
+    margin-left: 9vw;
+    margin-right: 7vw;
+    /*display: inline-block;*/
+    display: relative;
+    position: fixed;
+  }
+
+
+</style>
+
+</head>
+<body>
+  <div class="page">
+    <h1></h1>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.2.0/anime.js"></script>
+
+  <script>
+
+    jQuery(function($){
+
+      var dataUrl = 'https://www.data.act.gov.au/resource/rr3g-auih.json';
+      
+      jQuery.getJSON(dataUrl, function(airData) {
+
+        console.log(airData);
+        var coordinates = airData.map(function(object){
+          return object.gps.coordinates;
+        });
+        console.log("coordinates");
+        console.log(coordinates);
+
+        var coordX=new Array(1000);
+        var coordY= new Array(1000);
+
+        // for (var i =0; i<=1000; i++) {
+        //     coordX[i] = coordinates[0][i];
+        //     coordY[i] = coordinates[1][i];
+        //   }
+        
+
+        // console.log(coordX);
+        // console.log(coordY);
+
+        for (var i=0; i<coordinates.length; i++) {
+          if (!coordinates[i][0]||!coordinates[i][1]){
+            console.log(i,coordinates[i]);
+            return
+          }
+          coordX[i] = coordinates[i][0];
+          coordY[i] = coordinates[i][1];
+          
+        }
+
+
+
+        var random = Math.floor(Math.random()*10);
+
+        // var individual = highTemps[random];
+        // console.log(individual);
+
+        function getColor() {
+          var letter = '123456789ABCDEF';
+          var color = '#';
+          for (var i=0; i<6; i++) {
+            color = color+letter[Math.floor(Math.random()*14)];
+          }
+          return color;
+        }
+
+        var blues = ["#40E0D0", "#00BFFF", "#00CED1", "#000080", "#6495ED", "#87CEEB", "#ADD8E6", "#00FFFF", "#2C5197", "#D9D9F3","#E6E6FA", "#D8BFD8", "#DA70D6", "#9370DB", "#8A2BE2", "#4B0082", "#9932CC", "#FF00FF", "#FFC0CB", "#FFB6C1", "#FF69B4", "#FF1493", " #DB7093", "#C71585", "#FFA07A", "#FA8072", "#F08080", "#B22222", "#DC143C", "#FF6347", "#DB7093", "#8B0000"];
+
+        var dimension = 18+"px";
+
+        for (var i=0; i<coordinates.length; i++){
+          // for (var j=0; j<highTemps[i]; j++){
+
+            var newSquare = $('<div class="box">');
+            var xPos = coordX[i]+"px";
+            var yPos = coordY[i]+"px";
+            newSquare.css({
+              height:dimension,
+              width:dimension,
+              background:blues[i%32],
+              top:xPos,
+              left:yPos
+            });
+
+            $('.page').append(newSquare);
+            newSquare.data("coord", {"x":coordX[i],"y":coordY[i]}); //assigned data to object
+            newSquare.on("mouseover", function(){
+              // console.log($(this).data("coord"));
+              var text = $(this).data("coord");
+              console.log(text);
+            $('.page').append("<p>"+text.x + ", "+ text.y +"</p>");
+            
+
+            })
+          }
+
+          // var lineBreak = ('<div class="lineBreak">');
+
+          // $('.page').append(lineBreak)
+
+      });
+
+    });
+
+  </script>
+
+  </html>
