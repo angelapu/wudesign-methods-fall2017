@@ -1,0 +1,13 @@
+{
+  "entrypoints" : [
+    {
+      "name" : "Not working",
+      "file" : "one.html"
+    },
+    {
+      "name" : "BEWARE NETWORK CALLS",
+      "file" : "eight.html"
+    }
+    
+  ]
+}
