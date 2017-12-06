@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- <title>Example loading and filtering of Weather Forecast Dataset</title>   -->
+
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto" rel="stylesheet">
+  
+  <style type="text/css">
+
+  .box {
+    transition: 2s;
+    display: inline-flex;
+    margin-top: 0px;
+    width: 2vw;
+    /* position: absolute; */
+    position: relative;
+
+  }
+
+  .data {
+    font-family: 'Roboto', sans-serif;;
+    font-size: 1.5em;
+    color: black;
+    display: none;
+    background-color: white;
+    position: absolute;
+    z-index: 100;
+    width: 200px;
+  }
+
+  .box:hover .data {
+    display: block;
+  }
+
+  .lineBreak {
+    width: 20px;
+    /*height: 10px;*/
+  }
+
+  .container {
+    margin: 20px;
+    /*height: 100%;*/
+    margin-top: 40px;
+    position: absolute;
+    bottom:0;
+  }
+
+  .past {
+    /*position: fixed;*/
+    display: flex;
+    align-items:flex-end;
+    position: absolute;
+    bottom: 0;
+    width: 50%;
+    left: 20%;
+  }
+
+  .future {
+    /*position: absolute;*/
+    display: flex;
+    align-items:flex-end;
+    position: absolute;
+    /*width: 70%;*/
+  }
+
+  .page {
+    position: relative;
+    height: 100%;
+    /*display: none;*/
+    opacity: 0;
+  }
+
+  body {
+    width: 100%;
+    height: 100%;
+    font-family: 'Roboto Slab', serif;
+    background-color: black;
+    overflow: hidden;
+  }
+
+  html {
+    height: 100%;
+  }
+
+  .intro {
+    background-color: black;
+    height: 200vh;
+    width: 95vw;
+    color: white;
+    text-align: right;
+    padding-right: 100px;
+    font-size: 60px;
+    margin:0px;
+    line-height: 1;
+    position: absolute;
+  }
+
+  .introMessage {
+    margin: 0px;
+    margin-right: 50px;
+    padding-top: 20px;
+    font-style: italic;
+    width: 100%;
+
+  }
+
+  .introMessage2 {
+    /*padding-top: 200px;*/
+    margin: 0px;
+    /*margin-top: 175px;*/
+    font-family: 'Roboto';
+    font-size: 140px;
+    text-align: left;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    margin-left: 50px;
+    /*margin-top: 100px;*/
+  }
+
+  .message {
+    margin: 0px;
+    color: white;
+    /* text-align: right; */
+    position: relative;
+    left: 45vw;
+    padding: 0px;
+    width: 50%;
+    /* margin-right: 30px; */
+  }
+
+  .description {
+    font-style: italic;
+    font-size: 6em;
+    margin-bottom: 0px;
+    text-align: left;
+  }
+
+  .label {
+    font-size: 20px;
+    /*width: 300px;*/
+    text-align: left;
+    position: inherit;
+  }
+
+
+</style>
+
+</head>
+<body>
+
+  <div class="intro">
+    <h1 class="introMessage">What do you think the weather was 10 years ago?</h1>
+    <h1 class="introMessage2">What about compared to now?</h1>
+  </div>
+
+  <div class="page">
+    <div class="message">
+      <h1 class="description">Global Warming is Real</h1>
+      <p class="label">Global warming, also referred to as climate change, is the observed century-scale rise in the average temperature of the Earth's climate system and its related effects. Multiple lines of scientific evidence show that the climate system is warming.</p>
+    </div>
+
+    <div class="container past"></div>
+    <div class="container future"></div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.2.0/anime.js"></script>
+
+  <script>
+
+    var hiTempsNew = [];
+    var hiTempsOld = [];
+    var dateOld=[];
+    var dateNew=[];
+
+    var counter=0;
+
+    var blues = ["#0058e8", "#6b9bea", "#6bbfea", "#12a9ba", "#007b93"];
+
+    var reds = ["#d82502", "#fc6c3c", "#d80000", "#ffc700", "#ff9000", "#cc0062", "#fc6202", "#fc015d","#fcb900", "#b70101"];
+
+    $(document).ready(function(){
+
+
+    function getTheData() {
+
+  // let's see if we have cached data...
+      hiTempsOld = JSON.parse(window.sessionStorage.getItem('storeHiTempsOld'));
+      dateOld = JSON.parse(window.sessionStorage.getItem('storeDateOld'));
+      // hiTempsNew = json.parse(window.sessionStorage.getItem('storeHiTempsNew'));
+      // dateNew = json.parse(window.sessionStorage.getItem('storeDateNew'));
+
+
+  
+  if (hiTempsOld && dateOld)  { // pseudocode, not real!
+    ifDoneOld();
+    // we have valid cached data, let's use it instead of asking from wunderground again.
+    
+
+  } 
+  else {
+      hiTempsOld = [];
+      dateOld=[];
+      getWunderground();
+
+  }
+}
+
+var dataSTLOld = [
+    // 'http://api.wunderground.com/api/f45d7141a2aaca02/history_20071127/q/MO/St_Louis.json',
+    'http://api.wunderground.com/api/f45d7141a2aaca02/history_20071128/q/MO/St_Louis.json',
+    'http://api.wunderground.com/api/f45d7141a2aaca02/history_20071129/q/MO/St_Louis.json',
+    'http://api.wunderground.com/api/f45d7141a2aaca02/history_200711230/q/MO/St_Louis.json',
+    'http://api.wunderground.com/api/f45d7141a2aaca02/history_20071201/q/MO/St_Louis.json',
+    'http://api.wunderground.com/api/f45d7141a2aaca02/history_20071202/q/MO/St_Louis.json'
+    ];
+
+    var dataSTLNew = [
+    // 'http://api.wunderground.com/api/f45d7141a2aaca02/history_20071127/q/MO/St_Louis.json',
+    'http://api.wunderground.com/api/f45d7141a2aaca02/forecast10day/q/CA/St_Louis.json'
+    ];
+
+
+    function getWunderground() {
+      dataSTLOld.forEach(function(url,i) {
+
+        jQuery.getJSON(url, function(forecastData) {
+
+          hiTempsOld[i]=(forecastData.history.dailysummary[0].meantempi);
+          dateOld[i]=forecastData.history.date.pretty;
+
+        // console.log(dateOld[i]);
+
+        hiTempsOld[5] = 30;
+        hiTempsOld[6] = 36;
+        hiTempsOld[7] = 37;
+        hiTempsOld[8] = 26;
+        hiTempsOld[9] = 33;
+
+        dateOld[5]= "December 3, 2007";
+        dateOld[6]= "December 4, 2007";
+        dateOld[7]= "December 5, 2007";
+        dateOld[8]= "December 6, 2007";
+        dateOld[9]= "December 7, 2007";
+        // console.log(dateOld);
+
+      // console.log("hitempsOld", hiTempsOld);
+      counter++;
+      if (counter== dataSTLOld.length) {
+        ifDoneOld();
+
+        var serializedDataHiTempsOld = JSON.stringify(hiTempsOld);
+        var serializedDataDateOld = JSON.stringify(dateOld);
+
+        window.sessionStorage.setItem('storeHiTempsOld', serializedDataHiTempsOld);
+        window.sessionStorage.setItem('storeDateOld', serializedDataDateOld);
+      }
+
+    });
+      });
+};
+
+
+      function ifDoneOld () {
+        for (let i=0; i<hiTempsOld.length+5; i++) {
+          hiTempsOld[i];
+          var tempSquare = $('<div class="box"></div>');
+          var data = $('<p class="data">'+hiTempsOld[i] + '<sup>o</sup>F<br>' + dateOld[i]+'</p>')
+
+        // console.log("executed")
+
+        tempSquare.css({
+          height:(8*hiTempsOld[i])+'px',
+          background:blues[i%5]
+        });
+
+        $('.past').append(tempSquare);
+        tempSquare.append(data);
+        // tempSquare.append(hiTempsOld[i]);
+      }
+    }
+
+
+  jQuery.getJSON(dataSTLNew, function(forecastData) {
+    // console.log(forecastData);
+
+    hiTempsNew = forecastData.forecast.simpleforecast.forecastday.map(function(object){
+      return object.high.fahrenheit;
+    })
+    dateNew = forecastData.forecast.simpleforecast.forecastday.map(function(object) {
+      return object.date.pretty;
+    });
+    console.log(dateNew);
+    ifDoneNew();
+
+  });
+
+
+    function ifDoneNew () {
+      for (let i=0; i<hiTempsNew.length; i++) {
+        hiTempsNew[i];
+        var tempSquare = $('<div class="box">');
+        var data = $('<p class="data">'+hiTempsNew[i]+ '<sup>o</sup>F<br>' + dateNew[i] +'</p>')
+
+        tempSquare.css({
+          height:(8*hiTempsNew[i])+'px',
+          // width:50+'px',
+          background:reds[i]
+        });
+
+        $('.future').append(tempSquare);
+        tempSquare.append(data);
+        
+      }
+    }
+
+        var myVar = setTimeout(function() {
+
+      $('.introMessage').css({
+        opacity:'0',
+        transition:2+'s',
+        // display:'none'
+      })
+
+      $('.introMessage2').css({
+        opacity:'1',
+        transition:2+'s'
+      })
+
+    }, 3000);
+
+        var myVar = setTimeout(function() {
+
+      $('.intro').css({
+        opacity:'0',
+        transition:2+'s',
+        // display:'none'
+      })
+
+      $('.page').css({
+        opacity:'1',
+        transition:2+'s'
+      })
+
+    }, 6000);
+
+    getTheData();
+
+  });
+
+</script>
+
+</html>

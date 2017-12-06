@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- <title>Example loading and filtering of Weather Forecast Dataset</title>   -->
+  
+  <style type="text/css">
+
+  .box {
+    /*background-color: #86efd7;*/
+    /*position: absolute;*/
+    transition: 2s;
+    display: inline-flex;
+    margin-top: 0px;
+  }
+
+  .lineBreak {
+    width: 100vw;
+    height: 10px;
+  }
+
+  .page {
+    height: 100vh;
+    width: 90vw;
+    margin-left: 9vw;
+    margin-right: 7vw;
+    display: inline-block;
+  }
+
+  body {
+    /*background-color: #012766;*/
+    /*color: white;*/
+  }
+
+  h1 {
+  }
+
+  .hideRise {
+    /*display: none;*/
+    color: blue;
+  }
+
+  .hideSet {
+    /*display: none;*/
+  }
+
+  .initial {
+    position: absolute;
+    top: 30%;
+    left: 35%;
+  }
+
+
+</style>
+
+</head>
+<body>
+  <select name="meal" id="meal" onChange="changecat(this.value);">
+    <option value="" disabled selected>Select</option>
+    <option value="A">St.Louis</option>
+    <option value="B">B</option>
+    <option value="C">C</option>
+  </select>
+
+  <select name="category" id="category">
+    <option value="" disabled selected>Select</option>
+  </select>
+
+</div>
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.2.0/anime.js"></script>
+
+<script>
+  var changecat;
+
+  $(document).ready(function(){
+
+    var dataUrl = [
+    'http://api.wunderground.com/api/f45d7141a2aaca02/history_20071127/q/MO/St_Louis.json'
+    ];
+
+    var hiTemps = [];
+
+    jQuery.getJSON(dataUrl, function(forecastData) {
+      console.log(forecastData);
+
+      hiTemps = forecastData.history.observations.map(function(object){
+        return object.tempi;
+      })
+
+      console.log("hitemps", hiTemps);
+
+
+
+      var B = ["Soup", "Juice", "Water", "Others"];
+      var C = ["Soup", "Juice", "Coffee", "Tea", "Others"];
+
+      var mealsByCategory = {
+        A: hiTemps,
+        B: B,
+        C: C
+
+      }
+
+      changecat = function(value) {
+        if (value.length == 0) document.getElementById("category").innerHTML = "<option></option>";
+        else {
+          var catOptions = "";
+          for (categoryId in mealsByCategory[value]) {
+            catOptions += "<option>" + mealsByCategory[value][categoryId] + "</option>";
+          }
+          document.getElementById("category").innerHTML = catOptions;
+        }
+      }
+
+    });
+  });
+
+</script>
+
+</html>

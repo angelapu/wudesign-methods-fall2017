@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- <title>Example loading and filtering of Weather Forecast Dataset</title>   -->
+
+  <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Slab" rel="stylesheet">
+  
+  <style type="text/css">
+
+  .box {
+    /*background-color: #86efd7;*/
+    /*position: absolute;*/
+    transition: 2s;
+    display: inline-flex;
+    margin-top: 0px;
+    width: 70px;
+  }
+
+  .lineBreak {
+    width: 20px;
+    /*height: 10px;*/
+  }
+
+  .container {
+    margin: 20px;
+    height: 100%;
+    margin-top: 40px;
+  }
+
+  .past {
+    /*position: fixed;*/
+    position: relative;
+    float: right;
+    bottom: 0;
+    top: 52%;
+  }
+
+  .future {
+    /*position: absolute;*/
+    float:left bottom;
+    position: absolute;
+  }
+
+  .page {
+    /*height: 100vh;*/
+    width: 90%;
+    /*margin-left: 9vw;*/
+    /*margin-right: 7vw;*/
+    display: block;
+    position: relative;
+    display: none;
+  }
+
+  body {
+    /*background-color: #012766;*/
+    /*color: white;*/
+    display: inline-flex;
+    width: 100%;
+    /*margin-left: 8%;*/
+    /*margin-right: 8%;*/
+    /*margin-top: 3%;*/
+    /*width: 84%;*/
+    font-family: 'Roboto Slab', serif;
+    letter-spacing: 5px;
+  }
+
+  .intro {
+    background-color: black;
+    height: 200vh;
+    width: 95vw;
+    color: white;
+    text-align: right;
+    padding-right: 100px;
+    font-size: 75px;
+    margin:0px;
+    line-height: 1;
+  }
+
+  .introMessage {
+    margin: 0px;
+    padding-top: 20px;
+    font-style: italic;
+  }
+
+  .introMessage2 {
+    /*padding-top: 200px;*/
+    margin: 0px;
+    margin-top: 175px;
+    font-family: 'Roboto';
+    font-size: 200px;
+  }
+
+
+</style>
+
+</head>
+<body>
+  <div class="intro">
+    <h1 class="introMessage">What do you think the weather was 10 years ago?</h1>
+    <h1 class="introMessage2">What about compared to now?</h1>
+  </div>
+
+  <div class="page">
+    <div class="container past"></div>
+    <div class="container future"></div>
+  </div>
+  <!-- <select name="meal" id="meal" onChange="changecat(this.value);">
+    <option value="" disabled selected>Select</option>
+    <option value="A">St. Louis</option> -->
+    <!-- <option value="B">Los Angeles</option> -->
+    <!-- <option value="C">C</option> -->
+ <!--  </select>
+
+  <select name="category" id="category">
+    <option value="" disabled selected>Select</option>
+  </select>
+
+</div> -->
+
+<!-- </div> -->
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.2.0/anime.js"></script>
+
+<script>
+  var changecat;
+
+  var hiTempsOld = [];
+  var hiTempsNew = [];
+
+
+  var counter=0;
+
+  var blues = ["#40E0D0", "#00BFFF", "#00CED1", "#000080", "#6495ED", "#87CEEB", "#ADD8E6", "#00FFFF", "#2C5197", "#D9D9F3","#E6E6FA", "#D8BFD8", "#DA70D6", "#9370DB", "#8A2BE2", "#4B0082", "#9932CC", "#FF00FF", "#FFC0CB", "#FFB6C1", "#FF69B4", "#FF1493", " #DB7093", "#C71585", "#FFA07A", "#FA8072", "#F08080", "#B22222", "#DC143C", "#FF6347", "#DB7093", "#8B0000"];
+
+  $(document).ready(function(){
+
+    var dataSTLOld = [
+    // 'http://api.wunderground.com/api/f45d7141a2aaca02/history_20071127/q/MO/St_Louis.json',
+    'http://api.wunderground.com/api/f45d7141a2aaca02/history_20071128/q/MO/St_Louis.json',
+    'http://api.wunderground.com/api/f45d7141a2aaca02/history_20071129/q/MO/St_Louis.json',
+    'http://api.wunderground.com/api/f45d7141a2aaca02/history_200711230/q/MO/St_Louis.json',
+    'http://api.wunderground.com/api/f45d7141a2aaca02/history_20071201/q/MO/St_Louis.json',
+    'http://api.wunderground.com/api/f45d7141a2aaca02/history_20071202/q/MO/St_Louis.json'
+    ];
+
+    var dataSTLNew = [
+    // 'http://api.wunderground.com/api/f45d7141a2aaca02/history_20071127/q/MO/St_Louis.json',
+    'http://api.wunderground.com/api/f45d7141a2aaca02/forecast10day/q/CA/St_Louis.json'
+    ];
+
+    var hiTempsNew = [];
+    var hiTempsOld = [];
+
+
+    
+    dataSTLOld.forEach(function(url,i) {
+
+      jQuery.getJSON(url, function(forecastData) {
+        // console.log("forecastData",forecastData);
+
+      // hiTemps = forecastData.history.dailysummary.map(function(object){
+      //   return object.meantempi;
+      // })
+      hiTempsOld[i]=(forecastData.history.dailysummary[0].meantempi);
+
+      // console.log("hitempsOld", hiTempsOld);
+
+
+      var B = ["Soup", "Juice", "Water", "Others"];
+      var C = ["Soup", "Juice", "Coffee", "Tea", "Others"];
+
+      var mealsByCategory = {
+        A: hiTempsOld,
+        B: B,
+        C: C
+
+      }
+
+      changecat = function(value) {
+        if (value.length == 0) document.getElementById("category").innerHTML = "<option></option>";
+        else {
+          var catOptions = "";
+          for (categoryId in mealsByCategory[value]) {
+            catOptions += "<option>" + mealsByCategory[value][categoryId] + "</option>";
+          }
+          document.getElementById("category").innerHTML = catOptions;
+        }
+      }
+
+      counter++;
+      if (counter== dataSTLOld.length) {
+        ifDoneOld();
+      }
+
+    });
+    });
+
+    function ifDoneOld () {
+      for (let i=0; i<hiTempsOld.length; i++) {
+        hiTempsOld[i];
+        var tempSquare = $('<div class="box">');
+        tempSquare.css({
+          height:(8*hiTempsOld[i])+'px',
+          // width:50+'px',
+          background:blues[Math.floor(Math.random()*32)]
+        });
+
+        $('.past').append(tempSquare);
+        console.log(i," ", hiTempsOld[i]);
+        // $('.page').append('<h1>'+hiTemps[i]+'</h1>');
+      }
+      // $('.page').append($('<div class"lineBreak"></div>'));
+    }
+
+
+    jQuery.getJSON(dataSTLNew, function(forecastData) {
+      console.log(forecastData);
+
+      hiTempsNew = forecastData.forecast.simpleforecast.forecastday.map(function(object){
+        return object.high.fahrenheit;
+      })
+
+      console.log(hiTempsNew);
+      ifDoneNew();
+
+    });
+
+
+    function ifDoneNew () {
+      for (let i=0; i<hiTempsNew.length; i++) {
+        hiTempsNew[i];
+        var tempSquare = $('<div class="box">');
+        tempSquare.css({
+          height:(8*hiTempsNew[i])+'px',
+          // width:50+'px',
+          background:blues[Math.floor(Math.random()*32)]
+        });
+
+        $('.future').append(tempSquare);
+        console.log(i," ", hiTempsNew[i]);
+        // $('.page').append('<h1>'+hiTemps[i]+'</h1>');
+      }
+      // $('.page').append($('<div class"lineBreak"></div>'));
+    }
+
+    var myVar = setInterval(function() {
+
+        $('.intro').css({
+          opacity:'0',
+          transition:2+'s'
+        })
+
+      }, 3000);
+
+  });
+
+</script>
+
+</html>
